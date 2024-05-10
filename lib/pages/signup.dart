@@ -15,6 +15,13 @@ class _SignupState extends State<Signup> {
   var loading = false;
   final formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
+  String? firstname,
+      lastname,
+      username,
+      email,
+      phoneNumber,
+      password,
+      confirmPassword;
 
   // Future<Map<String, Object>> Signup() async {
   //   try {
@@ -108,6 +115,9 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onSaved: (value) {
+                        firstname = value;
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -145,6 +155,9 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onSaved: (value) {
+                        lastname = value;
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -182,6 +195,9 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onSaved: (value) {
+                        username = value;
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -227,6 +243,9 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onSaved: (value) {
+                        email = value;
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -264,6 +283,9 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onSaved: (value) {
+                        phoneNumber = value;
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -315,13 +337,16 @@ class _SignupState extends State<Signup> {
                             RegExp(r'[0-9]').hasMatch(value.toString()) &&
                             RegExp(r'[!@#$%^&*(”’)+,-./:;<=>?_^`{|~]+')
                                 .hasMatch(value.toString()) &&
-                            (value.toString().length > 8)) {
+                            (value.toString().length >= 8)) {
                           return null;
                         } else {
-                          return 'Password must contain one uppercase, \n character one lowercase character, one number and \n one of the special characters \n !@#\$%^&*(”’)+,-./:;<=>?_^`{|~';
+                          return 'Password must be atleast 8 characters containing \none uppercase, character one lowercase character, \none number and one of the special characters \n !@#\$%^&*(”’)+,-./:;<=>?_^`{|~';
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onSaved: (value) {
+                        password = value;
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -374,6 +399,9 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onSaved: (value) {
+                        confirmPassword = value;
+                      },
                     ),
                     const SizedBox(
                       height: 8,
@@ -401,19 +429,23 @@ class _SignupState extends State<Signup> {
                     TextButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('signing up'),
-                                  CircularProgressIndicator.adaptive(
-                                    backgroundColor: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(
+                          //     content: Row(
+                          //       mainAxisAlignment:
+                          //           MainAxisAlignment.spaceBetween,
+                          //       children: [
+                          //         Text('signing up'),
+                          //         CircularProgressIndicator.adaptive(
+                          //           backgroundColor: Colors.white,
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // );
+                          formKey.currentState!.save();
+                          print(
+                            '$firstname, $lastname, $username, $email, $phoneNumber, $password, $confirmPassword,',
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
