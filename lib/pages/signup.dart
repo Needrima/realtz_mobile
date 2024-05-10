@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:realtz_mobile/constants/constants.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -10,8 +12,20 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
   var isPasswordShown = false;
   var isConfirmPasswordShown = false;
+  var loading = false;
   final formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
+
+  // Future<Map<String, Object>> Signup() async {
+  //   try {
+  //     var url = Uri.https(userServiceBaseURI, 'signup');
+  //     var response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
+  //     print('Response status: ${response.statusCode}');
+  //     print('Response body: ${response.body}');
+  //   }catch(error) {
+  //     throw error.toString();
+  //   }
+  // };
 
   @override
   Widget build(BuildContext context) {
@@ -383,10 +397,13 @@ class _SignupState extends State<Signup> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('signing up'),
-                                  CircularProgressIndicator.adaptive(backgroundColor: Colors.white,),
+                                  CircularProgressIndicator.adaptive(
+                                    backgroundColor: Colors.white,
+                                  ),
                                 ],
                               ),
                             ),
