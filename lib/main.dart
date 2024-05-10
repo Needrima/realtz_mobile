@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/landing_page.dart';
 import 'package:realtz_mobile/pages/signup.dart';
 
 void main() {
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'OpenSans',
         useMaterial3: true,
       ),
-      home: const Signup(),
+      home: const LandingPage(),
       debugShowCheckedModeBanner: false,
     );
   }
