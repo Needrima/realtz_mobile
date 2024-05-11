@@ -22,7 +22,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
   void startTimer() {
     const oneSecond = Duration(seconds: 1);
     timer = Timer.periodic(oneSecond, (timer) {
-      print('tick');
       setState(() {
         if (secondsRemaining == 0) {
           timer.cancel();

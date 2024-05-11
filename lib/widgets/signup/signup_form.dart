@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SignupForm extends StatefulWidget {
-  final Function(int) onChangeStep;
+  final void Function(int) onChangeStep;
   const SignupForm({super.key, required this.onChangeStep});
 
   @override
