@@ -110,6 +110,11 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     const Chip(
+                      avatar: Icon(
+                        Icons.alarm_outlined,
+                        color: Color.fromRGBO(34, 34, 34, 0.05),
+                        fill: 1,
+                      ),
                       label: Text('00:19'),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
