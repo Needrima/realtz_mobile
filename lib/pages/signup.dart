@@ -12,7 +12,7 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  var currentStep = 1;
+  var currentStep = 2;
 
   void onChangeStep(int step) {
     setState(() {
@@ -23,7 +23,9 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentStep == 1 ? SignupForm(onChangeStep: onChangeStep) : const VerifyEmail(),
+      body: currentStep == 1
+          ? SignupForm(onChangeStep: onChangeStep)
+          : const VerifyEmail(),
     );
   }
 }

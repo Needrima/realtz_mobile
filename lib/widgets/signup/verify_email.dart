@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 class VerifyEmail extends StatefulWidget {
@@ -9,6 +10,39 @@ class VerifyEmail extends StatefulWidget {
 }
 
 class _VerifyEmailState extends State<VerifyEmail> {
+  late Timer timer;
+  int secondsRemaining = 180;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    const oneSecond = Duration(seconds: 1);
+    timer = Timer.periodic(oneSecond, (timer) {
+      print('tick');
+      setState(() {
+        if (secondsRemaining == 0) {
+          timer.cancel();
+          // Timer completed, handle here
+        } else {
+          secondsRemaining--;
+        }
+      });
+    });
+  }
+
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    String minuteString = minutes < 10 ? '0$minutes' : '$minutes';
+    String secondString =
+        remainingSeconds < 10 ? '0$remainingSeconds' : '$remainingSeconds';
+    return '$minuteString:$secondString';
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -109,25 +143,30 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Chip(
-                      avatar: Icon(
-                        Icons.alarm_outlined,
-                        color: Color.fromRGBO(34, 34, 34, 0.05),
-                        fill: 1,
+                    Chip(
+                      avatar: const Icon(
+                        Icons.alarm,
+                        color: Color.fromRGBO(34, 34, 34, 0.6),
                       ),
-                      label: Text('00:19'),
-                      shape: RoundedRectangleBorder(
+                      label: Text(formatTime(secondsRemaining).toString()),
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(16),
                         ),
                       ),
-                      backgroundColor: Color.fromRGBO(34, 34, 34, 0.05),
+                      backgroundColor: const Color.fromRGBO(34, 34, 34, 0.05),
                     ),
                     GestureDetector(
                       // trigger conditionally depending on Countdown state
-                      onTap: () {
-                        print('resending otp');
-                      },
+                      onTap: secondsRemaining == 0
+                          ? () {
+                              //TODO: trigger resend OTP endpoint
+                              setState(() {
+                                secondsRemaining = 180;
+                              });
+                              startTimer();
+                            }
+                          : null,
                       child: RichText(
                         text: TextSpan(
                           text: 'Didn\'t receieve OTP? ',
