@@ -128,8 +128,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       TextSpan(
                         text: 'login',
                         style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.inversePrimary),
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
                       ),
                     ],
                   ),
@@ -183,7 +183,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       ),
                     ),
                     const SizedBox(
-                      height: 70,
+                      height: 50,
                     )
                   ],
                 ),
