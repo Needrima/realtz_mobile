@@ -68,6 +68,12 @@ class _SignupFormState extends State<SignupForm> {
         widget.onChangeStep(2);
       }
     } catch (error) {
+      setState(() {
+        loading = false;
+      });
+      
+      print('api error: ${error.toString()}');
+
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -77,11 +83,6 @@ class _SignupFormState extends State<SignupForm> {
           duration: const Duration(seconds: 5),
         ),
       );
-      setState(() {
-        loading = false;
-      });
-      print('api error: ${error.toString()}');
-      // throw error.toString();
     }
   }
 
