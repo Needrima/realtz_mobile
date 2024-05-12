@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:realtz_mobile/pages/login.dart';
 
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});
@@ -12,6 +13,7 @@ class VerifyEmail extends StatefulWidget {
 class _VerifyEmailState extends State<VerifyEmail> {
   late Timer timer;
   int secondsRemaining = 180;
+  bool loading = false;
 
   @override
   void initState() {
@@ -94,6 +96,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               height: 60,
             ),
             OtpTextField(
+              enabled: !loading,
               keyboardType: TextInputType.number,
               numberOfFields: 6,
               borderColor: Theme.of(context).colorScheme.inversePrimary,
@@ -118,13 +121,13 @@ class _VerifyEmailState extends State<VerifyEmail> {
             GestureDetector(
               // trigger conditionally depending on Countdown state
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) {
-                //       return const Login();
-                //     },
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const Login();
+                    },
+                  ),
+                );
               },
               child: Center(
                 child: RichText(

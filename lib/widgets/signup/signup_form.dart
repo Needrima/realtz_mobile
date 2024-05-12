@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/pages/login.dart';
-// import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 
 class SignupForm extends StatefulWidget {
   final void Function(int) onChangeStep;
@@ -17,6 +17,7 @@ class _SignupFormState extends State<SignupForm> {
   var loading = false;
   final formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
+
   String? firstname,
       lastname,
       username,
@@ -32,16 +33,59 @@ class _SignupFormState extends State<SignupForm> {
     super.dispose();
   }
 
-  Future<void> signup(UserSignup user) async {
-    // try {
-    //   var url = Uri.https(userServiceBaseURI, 'signup');
-    //   var response =
-    //       await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
-    //   print('Response status: ${response.statusCode}');
-    //   print('Response body: ${response.body}');
-    // } catch (error) {
-    //   throw error.toString();
-    // }
+  Future<void> signup(UserSignup userSignup) async {
+    setState(() {
+      loading = true;
+    });
+    try {
+      var url = Uri.https(userServiceBaseURI, 'signup');
+      var response = await http.post(
+        url,
+        body: {
+          'user_type': 'user',
+          'firstname': userSignup,
+          'lastname': userSignup.lastname,
+          'username': userSignup.username,
+          'email': userSignup.email,
+          'phone_number': userSignup.phoneNumber,
+          'password': userSignup.password,
+          'confirm_password': userSignup.confirmPassword,
+          'agreement': agreement,
+        },
+      );
+
+      setState(() {
+        loading = false;
+      });
+
+      if (response.statusCode != 201 && response.statusCode != 200) {
+        await showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text(
+                    '${response.body['error'] ?? 'could not complete signup, try later'}'),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Ok',
+                      style: TextStyle(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            });
+      } else {
+        widget.onChangeStep(2);
+      }
+    } catch (error) {
+      throw error.toString();
+    }
   }
 
   @override
@@ -406,47 +450,57 @@ class _SignupFormState extends State<SignupForm> {
                         confirmPassword = value;
                       },
                     ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: agreement,
-                          onChanged: (value) {
-                            print(value);
-                            setState(() {
-                              agreement = value!;
-                            });
-                          },
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'By checking the box, you agree to our ',
-                            style: Theme.of(context).textTheme.displayMedium,
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'terms ',
-                                style: TextStyle(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inversePrimary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const TextSpan(
-                                text: 'and\n',
-                              ),
-                              TextSpan(
-                                text: 'conditions',
-                                style: TextStyle(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inversePrimary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                    GestureDetector(
+                      onTap: () {
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) {
+                        //       return TermsAndConditions();
+                        //     },
+                        //   ),
+                        // );
+                      },
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: agreement,
+                            onChanged: (value) {
+                              setState(() {
+                                agreement = value!;
+                              });
+                            },
                           ),
-                        ),
-                      ],
+                          RichText(
+                            text: TextSpan(
+                              text: 'By checking the box, you agree to our ',
+                              style: Theme.of(context).textTheme.displayMedium,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'terms ',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: 'and\n',
+                                ),
+                                TextSpan(
+                                  text: 'conditions',
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 30,
@@ -464,7 +518,16 @@ class _SignupFormState extends State<SignupForm> {
                           } else {
                             formKey.currentState!.save();
                             // TODO: make api call to signup user
-                            widget.onChangeStep(2);
+                            UserSignup userSignup = UserSignup(
+                              firstname: firstname!,
+                              lastname: lastname!,
+                              username: username!,
+                              email: email!,
+                              phoneNumber: phoneNumber!,
+                              password: password!,
+                              confirmPassword: confirmPassword!,
+                            );
+                            signup(userSignup);
                           }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -485,17 +548,21 @@ class _SignupFormState extends State<SignupForm> {
                           ),
                         ),
                       ),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 45, vertical: 10),
-                        child: Text(
-                          'Create Account',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                          ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 45,
+                          vertical: 10,
                         ),
+                        child: loading
+                            ? const CircularProgressIndicator.adaptive()
+                            : const Text(
+                                'Create Account',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                ),
+                              ),
                       ),
                     ),
                   ],
