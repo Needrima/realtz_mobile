@@ -1,5 +1,5 @@
 const userServiceBaseURI = 'http://localhost:30000/api/user';
-const productServiceBaseURI = 'http://localhost:30002//api/product';
+const productServiceBaseURI = 'http://localhost:30002/api/product';
 const notificationServiceBaseURI = 'http://localhost:30002/api/notifications';
 
 // const userServiceBaseURI = 'https://realtz-user-service.onrender.com/api/user';

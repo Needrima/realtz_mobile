@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/login.dart';
 import 'package:realtz_mobile/pages/signup.dart';
 
 class LandingPage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _LandingPageState extends State<LandingPage> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
-                        return const Signup();
+                        return const Login();
                       }),
                     );
                   },

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/pages/login.dart';
@@ -37,54 +39,60 @@ class _SignupFormState extends State<SignupForm> {
     setState(() {
       loading = true;
     });
+
+    final Map<String, dynamic> reqData = {
+      'user_type': 'user',
+      'firstname': userSignup.firstname,
+      'lastname': userSignup.lastname,
+      'username': userSignup.username,
+      'email': userSignup.email,
+      'phone_number': userSignup.phoneNumber,
+      'password': userSignup.password,
+      'confirm_password': userSignup.confirmPassword,
+      'agreement': agreement,
+    };
+
     try {
-      var url = Uri.https(userServiceBaseURI, 'signup');
-      var response = await http.post(
-        url,
-        body: {
-          'user_type': 'user',
-          'firstname': userSignup,
-          'lastname': userSignup.lastname,
-          'username': userSignup.username,
-          'email': userSignup.email,
-          'phone_number': userSignup.phoneNumber,
-          'password': userSignup.password,
-          'confirm_password': userSignup.confirmPassword,
-          'agreement': agreement,
-        },
-      );
+      var url = Uri.parse('$userServiceBaseURI/signup');
+      var response = await http.post(url, body: jsonEncode(reqData), headers: {
+        'content-type': 'application/json',
+      });
+
+      final body = jsonDecode(response.body);
 
       setState(() {
         loading = false;
       });
 
       if (response.statusCode != 201 && response.statusCode != 200) {
-        await showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                content: Text(
-                    '${response.body['error'] ?? 'could not complete signup, try later'}'),
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text(
-                      'Ok',
-                      style: TextStyle(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            });
+        print('non 201 error: ${body['error']}');
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${body['error']}'),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
       } else {
         widget.onChangeStep(2);
       }
     } catch (error) {
-      throw error.toString();
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString()),
+          showCloseIcon: true,
+          closeIconColor: Colors.white,
+          duration: const Duration(seconds: 5),
+        ),
+      );
+      setState(() {
+        loading = false;
+      });
+      print('api error: ${error.toString()}');
+      // throw error.toString();
     }
   }
 
@@ -506,37 +514,40 @@ class _SignupFormState extends State<SignupForm> {
                       height: 30,
                     ),
                     TextButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          if (!agreement) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                    'you have not agreed to out terms and conditions'),
-                              ),
-                            );
-                          } else {
-                            formKey.currentState!.save();
-                            // TODO: make api call to signup user
-                            UserSignup userSignup = UserSignup(
-                              firstname: firstname!,
-                              lastname: lastname!,
-                              username: username!,
-                              email: email!,
-                              phoneNumber: phoneNumber!,
-                              password: password!,
-                              confirmPassword: confirmPassword!,
-                            );
-                            signup(userSignup);
-                          }
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('invalid information somewhere'),
-                            ),
-                          );
-                        }
-                      },
+                      onPressed: loading
+                          ? null
+                          : () {
+                              if (formKey.currentState!.validate()) {
+                                if (!agreement) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          'you have not agreed to out terms and conditions'),
+                                    ),
+                                  );
+                                } else {
+                                  formKey.currentState!.save();
+                                  // TODO: make api call to signup user
+                                  UserSignup userSignup = UserSignup(
+                                    firstname: firstname!,
+                                    lastname: lastname!,
+                                    username: username!,
+                                    email: email!,
+                                    phoneNumber: phoneNumber!,
+                                    password: password!,
+                                    confirmPassword: confirmPassword!,
+                                  );
+                                  signup(userSignup);
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content:
+                                        Text('invalid information somewhere'),
+                                  ),
+                                );
+                              }
+                            },
                       style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
                             Theme.of(context).colorScheme.inversePrimary),
@@ -554,7 +565,9 @@ class _SignupFormState extends State<SignupForm> {
                           vertical: 10,
                         ),
                         child: loading
-                            ? const CircularProgressIndicator.adaptive()
+                            ? const CircularProgressIndicator.adaptive(
+                                backgroundColor: Colors.white,
+                              )
                             : const Text(
                                 'Create Account',
                                 style: TextStyle(
