@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/pages/login.dart';
+// import 'package:http/http.dart' as http;
 
 class SignupForm extends StatefulWidget {
   final void Function(int) onChangeStep;
@@ -22,6 +24,7 @@ class _SignupFormState extends State<SignupForm> {
       phoneNumber,
       password,
       confirmPassword;
+  bool agreement = false;
 
   @override
   void dispose() {
@@ -29,16 +32,17 @@ class _SignupFormState extends State<SignupForm> {
     super.dispose();
   }
 
-  // Future<Map<String, Object>> Signup() async {
-  //   try {
-  //     var url = Uri.https(userServiceBaseURI, 'signup');
-  //     var response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
-  //     print('Response status: ${response.statusCode}');
-  //     print('Response body: ${response.body}');
-  //   }catch(error) {
-  //     throw error.toString();
-  //   }
-  // };
+  Future<void> signup(UserSignup user) async {
+    // try {
+    //   var url = Uri.https(userServiceBaseURI, 'signup');
+    //   var response =
+    //       await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
+    //   print('Response status: ${response.statusCode}');
+    //   print('Response body: ${response.body}');
+    // } catch (error) {
+    //   throw error.toString();
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -402,15 +406,66 @@ class _SignupFormState extends State<SignupForm> {
                         confirmPassword = value;
                       },
                     ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: agreement,
+                          onChanged: (value) {
+                            print(value);
+                            setState(() {
+                              agreement = value!;
+                            });
+                          },
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: 'By checking the box, you agree to our ',
+                            style: Theme.of(context).textTheme.displayMedium,
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'terms ',
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: 'and\n',
+                              ),
+                              TextSpan(
+                                text: 'conditions',
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                     const SizedBox(
                       height: 30,
                     ),
                     TextButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          // TODO: make api call to signup user
-                          widget.onChangeStep(2);
+                          if (!agreement) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'you have not agreed to out terms and conditions'),
+                              ),
+                            );
+                          } else {
+                            formKey.currentState!.save();
+                            // TODO: make api call to signup user
+                            widget.onChangeStep(2);
+                          }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -467,6 +522,7 @@ class _SignupFormState extends State<SignupForm> {
                           text: 'Login',
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -480,4 +536,23 @@ class _SignupFormState extends State<SignupForm> {
       ),
     );
   }
+}
+
+class UserSignup {
+  String firstname;
+  String lastname;
+  String username;
+  String email;
+  String phoneNumber;
+  String password;
+  String confirmPassword;
+
+  UserSignup(
+      {required this.firstname,
+      required this.lastname,
+      required this.username,
+      required this.email,
+      required this.phoneNumber,
+      required this.password,
+      required this.confirmPassword});
 }

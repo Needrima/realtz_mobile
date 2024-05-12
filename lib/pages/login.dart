@@ -173,7 +173,8 @@ class _LoginState extends State<Login> {
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(
-                          Theme.of(context).colorScheme.inversePrimary),
+                        Theme.of(context).colorScheme.inversePrimary,
+                      ),
                       shape: const MaterialStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
@@ -224,6 +225,7 @@ class _LoginState extends State<Login> {
                           text: 'Register',
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
