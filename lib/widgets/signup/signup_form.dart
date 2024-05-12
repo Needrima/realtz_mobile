@@ -58,10 +58,11 @@ class _SignupFormState extends State<SignupForm> {
                   style: Theme.of(context).textTheme.titleLarge,
                   children: <TextSpan>[
                     TextSpan(
-                        text: 'account',
-                        style: TextStyle(
-                            color:
-                                Theme.of(context).colorScheme.inversePrimary)),
+                      text: 'account',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
                   ],
                 ),
               ),

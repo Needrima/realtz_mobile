@@ -12,7 +12,7 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  var currentStep = 1;
+  var currentStep = 2;
 
   void onChangeStep(int step) {
     setState(() {

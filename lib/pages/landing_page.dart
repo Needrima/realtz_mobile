@@ -195,7 +195,7 @@ class _LandingPageState extends State<LandingPage> {
                                   )
                                 : ElevatedButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(
+                                      Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(builder: (context) {
                                           return const Signup();
                                         }),

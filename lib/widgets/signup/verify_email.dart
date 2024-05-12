@@ -44,14 +44,37 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
+    return Scaffold(
+      // appBar: PreferredSize(
+      //   preferredSize: const Size.fromHeight(kToolbarHeight),
+      //   child: SizedBox(
+      //     height: 300,
+      //     child: Stack(
+      //       children: [
+      //         Positioned.fill(
+      //           child: Image.asset(
+      //             'assets/images/verify-email-appbar-img.png',
+      //             fit: BoxFit.cover,
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      appBar: AppBar(
+        // backgroundColor: const Color.fromRGBO(34, 34, 34, 0.05),
+        flexibleSpace: Image.asset(
+          'assets/images/verify-email-appbar-img.png', // Path to your image
+          fit: BoxFit.cover,
+        ),
+      ),
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             RichText(
               text: TextSpan(
