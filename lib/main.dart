@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromRGBO(39, 113, 255, 1),
           inversePrimary: const Color.fromRGBO(39, 113, 255, 1),
         ),
-        fontFamily: 'OpenSans',
+        fontFamily: 'CustomOpenSans',
         useMaterial3: true,
       ),
       home: const Login(),

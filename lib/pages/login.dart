@@ -182,17 +182,23 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 80, vertical: 10),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 80,
+                        vertical: 10,
                       ),
+                      child: loading
+                          ? const CircularProgressIndicator.adaptive(
+                              backgroundColor: Colors.white,
+                            )
+                          : const Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                              ),
+                            ),
                     ),
                   ),
                 ],

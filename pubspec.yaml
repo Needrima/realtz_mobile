@@ -84,10 +84,9 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-    - family: OpenSans
+    - family: CustomOpenSans
       fonts:
-        - asset: assets/fonts/Open-sans-italic.ttf
-        - asset: assets/fonts/Open-sans.ttf
+        - asset: assets/fonts/open-sans-regular.ttf
           weight: 700
   #
   # For details regarding fonts from package dependencies,
