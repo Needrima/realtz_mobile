@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realtz_mobile/pages/landing_page.dart';
+import 'package:realtz_mobile/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'OpenSans',
         useMaterial3: true,
       ),
-      home: const LandingPage(),
+      home: const Login(),
       debugShowCheckedModeBanner: false,
     );
   }

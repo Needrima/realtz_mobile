@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/login.dart';
 
 class SignupForm extends StatefulWidget {
   final void Function(int) onChangeStep;
@@ -402,26 +403,6 @@ class _SignupFormState extends State<SignupForm> {
                       },
                     ),
                     const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          child: const Text('Forgot password?'),
-                          onTap: () {
-                            print('forgot password clicked');
-                          },
-                        ),
-                        GestureDetector(
-                          child: const Text('Show password'),
-                          onTap: () {
-                            print('show password clicked');
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
                       height: 30,
                     ),
                     TextButton(
@@ -463,6 +444,34 @@ class _SignupFormState extends State<SignupForm> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) {
+                        return const Login();
+                      }),
+                    );
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Already have an account? ',
+                      style: Theme.of(context).textTheme.displayMedium,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Login',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               )
             ],
