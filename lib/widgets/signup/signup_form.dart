@@ -35,26 +35,15 @@ class _SignupFormState extends State<SignupForm> {
     super.dispose();
   }
 
-  Future<void> signup(UserSignup userSignup) async {
+  Future<void> signup(Map<String, dynamic> userSignupData) async {
     setState(() {
       loading = true;
     });
 
-    final Map<String, dynamic> reqData = {
-      'user_type': 'user',
-      'firstname': userSignup.firstname,
-      'lastname': userSignup.lastname,
-      'username': userSignup.username,
-      'email': userSignup.email,
-      'phone_number': userSignup.phoneNumber,
-      'password': userSignup.password,
-      'confirm_password': userSignup.confirmPassword,
-      'agreement': agreement,
-    };
-
     try {
       var url = Uri.parse('$userServiceBaseURI/signup');
-      var response = await http.post(url, body: jsonEncode(reqData), headers: {
+      var response =
+          await http.post(url, body: jsonEncode(userSignupData), headers: {
         'content-type': 'application/json',
       });
 
@@ -528,16 +517,18 @@ class _SignupFormState extends State<SignupForm> {
                                 } else {
                                   formKey.currentState!.save();
                                   // TODO: make api call to signup user
-                                  UserSignup userSignup = UserSignup(
-                                    firstname: firstname!,
-                                    lastname: lastname!,
-                                    username: username!,
-                                    email: email!,
-                                    phoneNumber: phoneNumber!,
-                                    password: password!,
-                                    confirmPassword: confirmPassword!,
-                                  );
-                                  signup(userSignup);
+                                  final Map<String, dynamic> userSignupData = {
+                                    'user_type': 'user',
+                                    'firstname': firstname,
+                                    'lastname': lastname,
+                                    'username': username,
+                                    'email': email,
+                                    'phone_number': phoneNumber,
+                                    'password': password,
+                                    'confirm_password': confirmPassword,
+                                    'agreement': agreement,
+                                  };
+                                  signup(userSignupData);
                                 }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -616,23 +607,4 @@ class _SignupFormState extends State<SignupForm> {
       ),
     );
   }
-}
-
-class UserSignup {
-  String firstname;
-  String lastname;
-  String username;
-  String email;
-  String phoneNumber;
-  String password;
-  String confirmPassword;
-
-  UserSignup(
-      {required this.firstname,
-      required this.lastname,
-      required this.username,
-      required this.email,
-      required this.phoneNumber,
-      required this.password,
-      required this.confirmPassword});
 }
