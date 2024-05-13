@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/constants/constants.dart';
-import 'package:realtz_mobile/pages/login.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
 import 'package:http/http.dart' as http;
 
 class SignupForm extends StatefulWidget {

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/constants/constants.dart';
-import 'package:realtz_mobile/pages/forgot_password.dart';
-import 'package:realtz_mobile/pages/home.dart';
-import 'package:realtz_mobile/pages/signup.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/forgot_password.dart';
+import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
 import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
@@ -65,7 +65,7 @@ class _LoginState extends State<Login> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return const Home();
+              return const ProtectedPages();
             },
           ),
         );

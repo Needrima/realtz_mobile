@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/misc/time_formatter.dart';
-import 'package:realtz_mobile/pages/login.dart';
-import 'package:realtz_mobile/pages/signup.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
 import 'package:http/http.dart' as http;
 
 class ForgotPassword extends StatefulWidget {

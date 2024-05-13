@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:realtz_mobile/pages/login.dart';
-import 'package:realtz_mobile/pages/signup.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
