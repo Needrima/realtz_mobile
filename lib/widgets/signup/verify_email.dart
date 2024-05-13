@@ -10,8 +10,12 @@ import 'package:http/http.dart' as http;
 class VerifyEmail extends StatefulWidget {
   final String email;
   final String otpVerificationKey;
+  final void Function(String, String) setEmailAndOTPVerificationKey;
   const VerifyEmail(
-      {super.key, required this.email, required this.otpVerificationKey});
+      {super.key,
+      required this.email,
+      required this.otpVerificationKey,
+      required this.setEmailAndOTPVerificationKey});
 
   @override
   State<VerifyEmail> createState() => _VerifyEmailState();
@@ -74,7 +78,10 @@ class _VerifyEmailState extends State<VerifyEmail> {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${body['error']}'),
+            content: Text(
+              '${body['error']}',
+              style: const TextStyle(color: Colors.white),
+            ),
             showCloseIcon: true,
             closeIconColor: Colors.white,
             duration: const Duration(seconds: 5),
@@ -84,13 +91,16 @@ class _VerifyEmailState extends State<VerifyEmail> {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${body['message']}'),
+            content: Text(
+              '${body['message']}',
+              style: const TextStyle(color: Colors.white),
+            ),
             showCloseIcon: true,
             closeIconColor: Colors.white,
             duration: const Duration(seconds: 5),
           ),
         );
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) {
               return const Login();
@@ -106,7 +116,77 @@ class _VerifyEmailState extends State<VerifyEmail> {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error.toString()),
+          content: Text(
+            error.toString(),
+            style: const TextStyle(color: Colors.white),
+          ),
+          showCloseIcon: true,
+          closeIconColor: Colors.white,
+          duration: const Duration(seconds: 5),
+        ),
+      );
+    }
+  }
+
+  Future<void> resendOTP(Map<String, dynamic> resendOTPData) async {
+    setState(() {
+      loading = true;
+    });
+
+    try {
+      var url = Uri.parse('$userServiceBaseURI/send-otp');
+      var response =
+          await http.post(url, body: jsonEncode(resendOTPData), headers: {
+        'content-type': 'application/json',
+      });
+
+      final body = jsonDecode(response.body);
+
+      setState(() {
+        loading = false;
+      });
+
+      if (response.statusCode != 200) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${body['error']}',
+              style: const TextStyle(color: Colors.white),
+            ),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      } else {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${body['message']}',
+              style: const TextStyle(color: Colors.white),
+            ),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+        widget.setEmailAndOTPVerificationKey(
+            widget.email, body['otp_verification_key']);
+      }
+    } catch (error) {
+      setState(() {
+        loading = false;
+      });
+
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            error.toString(),
+            style: const TextStyle(color: Colors.white),
+          ),
           showCloseIcon: true,
           closeIconColor: Colors.white,
           duration: const Duration(seconds: 5),
@@ -215,8 +295,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       TextSpan(
                         text: 'login',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
-                        ),
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -246,7 +326,11 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       // trigger conditionally depending on Countdown state
                       onTap: secondsRemaining == 0 && !loading
                           ? () {
-                              //TODO: trigger resend OTP endpoint
+                              final Map<String, dynamic> resendOTPData = {
+                                'channel': 'email',
+                                'email': widget.email,
+                              };
+                              resendOTP(resendOTPData);
                               setState(() {
                                 secondsRemaining = 180;
                               });
@@ -261,9 +345,11 @@ class _VerifyEmailState extends State<VerifyEmail> {
                             TextSpan(
                               text: 'Resend OTP',
                               style: TextStyle(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inversePrimary),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),

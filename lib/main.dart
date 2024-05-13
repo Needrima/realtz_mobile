@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/pages/landing_page.dart';
-import 'package:realtz_mobile/pages/signup.dart';
 
 void main() {
   runApp(const MyApp());

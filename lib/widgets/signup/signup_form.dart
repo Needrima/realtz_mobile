@@ -61,7 +61,10 @@ class _SignupFormState extends State<SignupForm> {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${body['error']}'),
+            content: Text(
+              '${body['error']}',
+              style: const TextStyle(color: Colors.white),
+            ),
             showCloseIcon: true,
             closeIconColor: Colors.white,
             duration: const Duration(seconds: 5),
@@ -82,7 +85,10 @@ class _SignupFormState extends State<SignupForm> {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error.toString()),
+          content: Text(
+            error.toString(),
+            style: const TextStyle(color: Colors.white),
+          ),
           showCloseIcon: true,
           closeIconColor: Colors.white,
           duration: const Duration(seconds: 5),
@@ -517,7 +523,9 @@ class _SignupFormState extends State<SignupForm> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content: Text(
-                                          'you have not agreed to out terms and conditions'),
+                                        'you have not agreed to out terms and conditions',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
                                   );
                                 } else {
@@ -539,8 +547,10 @@ class _SignupFormState extends State<SignupForm> {
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content:
-                                        Text('invalid information somewhere'),
+                                    content: Text(
+                                      'invalid information somewhere',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 );
                               }

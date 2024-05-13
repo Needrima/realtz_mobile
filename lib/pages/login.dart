@@ -164,12 +164,12 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                   const SizedBox(
-                    height: 70,
+                    height: 40,
                   ),
                   TextButton(
                     onPressed: () {
                       formKey.currentState!.save();
-                      // TODO: make api call to signup user
+                      // TODO: make api call to login user
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(

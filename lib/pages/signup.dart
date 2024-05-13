@@ -22,7 +22,8 @@ class _SignupState extends State<Signup> {
     });
   }
 
-  void setEmailAndOTPVerificationKey(String userEmail, String userOtpVerificationKey) {
+  void setEmailAndOTPVerificationKey(
+      String userEmail, String userOtpVerificationKey) {
     setState(() {
       email = userEmail;
       otpVerificationKey = userOtpVerificationKey;
@@ -35,8 +36,13 @@ class _SignupState extends State<Signup> {
       body: currentStep == 1
           ? SignupForm(
               onChangeStep: onChangeStep,
-              setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey)
-          : VerifyEmail(email: email, otpVerificationKey: otpVerificationKey),
+              setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey,
+            )
+          : VerifyEmail(
+              email: email,
+              otpVerificationKey: otpVerificationKey,
+              setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey,
+            ),
     );
   }
 }
