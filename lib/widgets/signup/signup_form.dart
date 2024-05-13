@@ -7,7 +7,11 @@ import 'package:http/http.dart' as http;
 
 class SignupForm extends StatefulWidget {
   final void Function(int) onChangeStep;
-  const SignupForm({super.key, required this.onChangeStep});
+  final void Function(String, String) setEmailAndOTPVerificationKey;
+  const SignupForm(
+      {super.key,
+      required this.onChangeStep,
+      required this.setEmailAndOTPVerificationKey});
 
   @override
   State<SignupForm> createState() => _SignupFormState();
@@ -54,7 +58,6 @@ class _SignupFormState extends State<SignupForm> {
       });
 
       if (response.statusCode != 201 && response.statusCode != 200) {
-        print('non 201 error: ${body['error']}');
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -65,14 +68,16 @@ class _SignupFormState extends State<SignupForm> {
           ),
         );
       } else {
+        widget.setEmailAndOTPVerificationKey(
+          email!,
+          body['otp_verification_key'],
+        );
         widget.onChangeStep(2);
       }
     } catch (error) {
       setState(() {
         loading = false;
       });
-      
-      print('api error: ${error.toString()}');
 
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

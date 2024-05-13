@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/pages/login.dart';
+import 'package:http/http.dart' as http;
 
 class VerifyEmail extends StatefulWidget {
-  const VerifyEmail({super.key});
+  final String email;
+  final String otpVerificationKey;
+  const VerifyEmail(
+      {super.key, required this.email, required this.otpVerificationKey});
 
   @override
   State<VerifyEmail> createState() => _VerifyEmailState();
@@ -24,6 +31,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
   void startTimer() {
     const oneSecond = Duration(seconds: 1);
     timer = Timer.periodic(oneSecond, (timer) {
+      if (!context.mounted) return;
       setState(() {
         if (secondsRemaining == 0) {
           timer.cancel();
@@ -42,6 +50,69 @@ class _VerifyEmailState extends State<VerifyEmail> {
     String secondString =
         remainingSeconds < 10 ? '0$remainingSeconds' : '$remainingSeconds';
     return '$minuteString:$secondString';
+  }
+
+  Future<void> verifyEmail(Map<String, dynamic> verifyEmailData) async {
+    setState(() {
+      loading = true;
+    });
+
+    try {
+      var url = Uri.parse('$userServiceBaseURI/verify-email');
+      var response =
+          await http.post(url, body: jsonEncode(verifyEmailData), headers: {
+        'content-type': 'application/json',
+      });
+
+      final body = jsonDecode(response.body);
+
+      setState(() {
+        loading = false;
+      });
+
+      if (response.statusCode != 200) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${body['error']}'),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      } else {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${body['message']}'),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const Login();
+            },
+          ),
+        );
+      }
+    } catch (error) {
+      setState(() {
+        loading = false;
+      });
+
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString()),
+          showCloseIcon: true,
+          closeIconColor: Colors.white,
+          duration: const Duration(seconds: 5),
+        ),
+      );
+    }
   }
 
   @override
@@ -84,9 +155,10 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 style: Theme.of(context).textTheme.displayMedium,
                 children: <TextSpan>[
                   TextSpan(
-                    text: 'johndoe@gmail.com',
+                    text: widget.email,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -111,8 +183,13 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 // print(code);
               },
               //runs when every textfield is filled
-              onSubmit: (String verificationCode) {
-                print(verificationCode);
+              onSubmit: (verificationCode) {
+                final Map<String, dynamic> verifyEmailData = {
+                  'otp': verificationCode,
+                  'otp_verification_key': widget.otpVerificationKey,
+                  'email': widget.email,
+                };
+                verifyEmail(verifyEmailData);
               }, // end onSubmit
             ),
             const SizedBox(
@@ -167,7 +244,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     ),
                     GestureDetector(
                       // trigger conditionally depending on Countdown state
-                      onTap: secondsRemaining == 0
+                      onTap: secondsRemaining == 0 && !loading
                           ? () {
                               //TODO: trigger resend OTP endpoint
                               setState(() {

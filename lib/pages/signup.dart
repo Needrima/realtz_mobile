@@ -13,6 +13,8 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   var currentStep = 1;
+  var email = '';
+  var otpVerificationKey = '';
 
   void onChangeStep(int step) {
     setState(() {
@@ -20,12 +22,21 @@ class _SignupState extends State<Signup> {
     });
   }
 
+  void setEmailAndOTPVerificationKey(String userEmail, String userOtpVerificationKey) {
+    setState(() {
+      email = userEmail;
+      otpVerificationKey = userOtpVerificationKey;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentStep == 1
-          ? SignupForm(onChangeStep: onChangeStep)
-          : const VerifyEmail(),
+          ? SignupForm(
+              onChangeStep: onChangeStep,
+              setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey)
+          : VerifyEmail(email: email, otpVerificationKey: otpVerificationKey),
     );
   }
 }
