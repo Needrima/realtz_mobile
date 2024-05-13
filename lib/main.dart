@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/forgot_password.dart';
 import 'package:realtz_mobile/pages/landing_page.dart';
+import 'package:realtz_mobile/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'CustomOpenSans',
         useMaterial3: true,
       ),
-      home: const LandingPage(),
+      home: const ForgotPassword(),
       debugShowCheckedModeBanner: false,
     );
   }

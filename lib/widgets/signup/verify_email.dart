@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:realtz_mobile/constants/constants.dart';
+import 'package:realtz_mobile/misc/time_formatter.dart';
 import 'package:realtz_mobile/pages/login.dart';
 import 'package:http/http.dart' as http;
 
@@ -47,14 +48,14 @@ class _VerifyEmailState extends State<VerifyEmail> {
     });
   }
 
-  String formatTime(int seconds) {
-    int minutes = seconds ~/ 60;
-    int remainingSeconds = seconds % 60;
-    String minuteString = minutes < 10 ? '0$minutes' : '$minutes';
-    String secondString =
-        remainingSeconds < 10 ? '0$remainingSeconds' : '$remainingSeconds';
-    return '$minuteString:$secondString';
-  }
+  // String formatTime(int seconds) {
+  //   int minutes = seconds ~/ 60;
+  //   int remainingSeconds = seconds % 60;
+  //   String minuteString = minutes < 10 ? '0$minutes' : '$minutes';
+  //   String secondString =
+  //       remainingSeconds < 10 ? '0$remainingSeconds' : '$remainingSeconds';
+  //   return '$minuteString:$secondString';
+  // }
 
   Future<void> verifyEmail(Map<String, dynamic> verifyEmailData) async {
     setState(() {

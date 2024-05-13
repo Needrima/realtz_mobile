@@ -156,7 +156,13 @@ class _LoginState extends State<Login> {
                   Row(
                     children: [
                       GestureDetector(
-                        child: const Text('Forgot password ?'),
+                        child: Text(
+                          'Forgot password ?',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         onTap: () {
                           print('forgot password clicked');
                         },
