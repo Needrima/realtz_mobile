@@ -49,7 +49,7 @@ class _ProtectedPagesState extends State<ProtectedPages> {
             tooltip: 'Inbox',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_pin),
+            icon: Icon(Icons.person_rounded),
             label: 'Profile',
             tooltip: 'Profile',
           ),
@@ -59,20 +59,31 @@ class _ProtectedPagesState extends State<ProtectedPages> {
             _currentIndex = index;
           });
         },
-        unselectedItemColor: const Color.fromRGBO(34, 34, 34, 0.7),
-        selectedItemColor: Theme.of(context).colorScheme.inversePrimary,
+        unselectedItemColor: _currentIndex == 0
+            ? Colors.white
+            : const Color.fromRGBO(34, 34, 34, 0.7),
+        unselectedLabelStyle: TextStyle(
+          color: _currentIndex == 0
+              ? Colors.white
+              : const Color.fromRGBO(34, 34, 34, 0.7),
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+        ),
+        selectedItemColor: _currentIndex == 0
+            ? Theme.of(context).colorScheme.inversePrimary
+            : Colors.black,
+        selectedLabelStyle: TextStyle(
+          color: _currentIndex == 0
+              ? Theme.of(context).colorScheme.inversePrimary
+              : Colors.black,
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+        ),
         iconSize: 32,
-        selectedLabelStyle: const TextStyle(
-          color: Color.fromRGBO(34, 34, 34, 0.7),
-          fontSize: 10,
-          fontWeight: FontWeight.w700,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          color: Color.fromRGBO(34, 34, 34, 0.7),
-          fontSize: 10,
-          fontWeight: FontWeight.w700,
-        ),
         showUnselectedLabels: true,
+        // removing type property disables changing background color
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: _currentIndex == 0 ? Colors.black : Colors.white,
       ),
       body: pages[_currentIndex],
     );
