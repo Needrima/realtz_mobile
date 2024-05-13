@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/pages/forgot_password.dart';
+import 'package:realtz_mobile/pages/home.dart';
 import 'package:realtz_mobile/pages/signup.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,18 +20,74 @@ class _LoginState extends State<Login> {
   var loading = false;
   final formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
-  String? firstname,
-      lastname,
-      username,
-      email,
-      phoneNumber,
-      password,
-      confirmPassword;
+  String? email, password;
 
   @override
   void dispose() {
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> login(Map<String, dynamic> loginData) async {
+    setState(() {
+      loading = true;
+    });
+
+    try {
+      var url = Uri.parse('$userServiceBaseURI/login');
+      var response =
+          await http.post(url, body: jsonEncode(loginData), headers: {
+        'content-type': 'application/json',
+      });
+
+      final body = jsonDecode(response.body);
+
+      setState(() {
+        loading = false;
+      });
+
+      if (response.statusCode != 200) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${body['error']}',
+              style: const TextStyle(color: Colors.white),
+            ),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      } else {
+        print(body);
+        if (!context.mounted) return;
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const Home();
+            },
+          ),
+        );
+      }
+    } catch (error) {
+      setState(() {
+        loading = false;
+      });
+
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            error.toString(),
+            style: const TextStyle(color: Colors.white),
+          ),
+          showCloseIcon: true,
+          closeIconColor: Colors.white,
+          duration: const Duration(seconds: 5),
+        ),
+      );
+    }
   }
 
   @override
@@ -55,7 +116,8 @@ class _LoginState extends State<Login> {
                   TextSpan(
                     text: 'sign you in',
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary),
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
                   ),
                 ],
               ),
@@ -182,7 +244,11 @@ class _LoginState extends State<Login> {
                   TextButton(
                     onPressed: () {
                       formKey.currentState!.save();
-                      // TODO: make api call to login user
+                      final Map<String, dynamic> loginData = {
+                        "email": email,
+                        "password": password,
+                      };
+                      login(loginData);
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(

@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'CustomOpenSans',
         useMaterial3: true,
       ),
-      home: const ForgotPassword(),
+      home: const Login(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -91,7 +91,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ),
         );
       } else {
-        print('otp: $body["otp"]');
         otpVerificationKey = body['otp_verification_key'];
         setState(() {
           currentStep = 2;
