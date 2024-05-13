@@ -33,6 +33,12 @@ class _VerifyEmailState extends State<VerifyEmail> {
     startTimer();
   }
 
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
   void startTimer() {
     const oneSecond = Duration(seconds: 1);
     timer = Timer.periodic(oneSecond, (timer) {
@@ -47,15 +53,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
       });
     });
   }
-
-  // String formatTime(int seconds) {
-  //   int minutes = seconds ~/ 60;
-  //   int remainingSeconds = seconds % 60;
-  //   String minuteString = minutes < 10 ? '0$minutes' : '$minutes';
-  //   String secondString =
-  //       remainingSeconds < 10 ? '0$remainingSeconds' : '$remainingSeconds';
-  //   return '$minuteString:$secondString';
-  // }
 
   Future<void> verifyEmail(Map<String, dynamic> verifyEmailData) async {
     setState(() {

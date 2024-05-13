@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/forgot_password.dart';
 import 'package:realtz_mobile/pages/signup.dart';
 
 class Login extends StatefulWidget {
@@ -164,7 +165,13 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         onTap: () {
-                          print('forgot password clicked');
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const ForgotPassword();
+                              },
+                            ),
+                          );
                         },
                       ),
                     ],

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/misc/time_formatter.dart';
+import 'package:realtz_mobile/pages/login.dart';
 import 'package:realtz_mobile/pages/signup.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,15 +24,23 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController passwordController = TextEditingController();
   late Timer timer;
   int secondsRemaining = 180;
-
-  String? password, confirmPassword, email;
+  String? password, confirmPassword, email, otp, otpVerificationKey;
   bool loading = false;
-  int currentStep = 3;
+  bool verifyingEmail = false;
+  bool resendingOTP = false;
+  bool restingPassword = false;
+  int currentStep = 1;
 
   @override
   void initState() {
     super.initState();
     startTimer();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   void startTimer() {
@@ -49,9 +58,68 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     });
   }
 
+  Future<void> startPasswordRecovery(
+      Map<String, dynamic> startPasswordRecoveryData) async {
+    setState(() {
+      verifyingEmail = true;
+    });
+
+    try {
+      var url = Uri.parse('$userServiceBaseURI/start-password-recovery');
+      var response = await http
+          .post(url, body: jsonEncode(startPasswordRecoveryData), headers: {
+        'content-type': 'application/json',
+      });
+
+      final body = jsonDecode(response.body);
+
+      setState(() {
+        verifyingEmail = false;
+      });
+
+      if (response.statusCode != 200) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${body['error']}',
+              style: const TextStyle(color: Colors.white),
+            ),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      } else {
+        print('otp: $body["otp"]');
+        otpVerificationKey = body['otp_verification_key'];
+        setState(() {
+          currentStep = 2;
+        });
+      }
+    } catch (error) {
+      setState(() {
+        verifyingEmail = false;
+      });
+
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            error.toString(),
+            style: const TextStyle(color: Colors.white),
+          ),
+          showCloseIcon: true,
+          closeIconColor: Colors.white,
+          duration: const Duration(seconds: 5),
+        ),
+      );
+    }
+  }
+
   Future<void> resendOTP(Map<String, dynamic> resendOTPData) async {
     setState(() {
-      loading = true;
+      resendingOTP = true;
     });
 
     try {
@@ -64,7 +132,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       final body = jsonDecode(response.body);
 
       setState(() {
-        loading = false;
+        resendingOTP = false;
       });
 
       if (response.statusCode != 200) {
@@ -96,7 +164,91 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       }
     } catch (error) {
       setState(() {
-        loading = false;
+        resendingOTP = false;
+      });
+
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            error.toString(),
+            style: const TextStyle(color: Colors.white),
+          ),
+          showCloseIcon: true,
+          closeIconColor: Colors.white,
+          duration: const Duration(seconds: 5),
+        ),
+      );
+    }
+  }
+
+  Future<void> resetPassword(Map<String, dynamic> resetPasswordData) async {
+    setState(() {
+      restingPassword = true;
+    });
+
+    try {
+      var url = Uri.parse('$userServiceBaseURI/complete-password-recovery');
+      var response =
+          await http.post(url, body: jsonEncode(resetPasswordData), headers: {
+        'content-type': 'application/json',
+      });
+
+      final body = jsonDecode(response.body);
+
+      setState(() {
+        restingPassword = false;
+      });
+
+      if (response.statusCode != 200) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${body['error']}',
+              style: const TextStyle(color: Colors.white),
+            ),
+            showCloseIcon: true,
+            closeIconColor: Colors.white,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      } else {
+        if (!context.mounted) return;
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Password reset'),
+                content: Text('${body["message"]}'),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Login();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Proceed to login',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            });
+      }
+    } catch (error) {
+      setState(() {
+        resendingOTP = false;
       });
 
       if (!context.mounted) return;
@@ -164,11 +316,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 : currentStep == 2
                     ? RichText(
                         text: TextSpan(
-                          text: 'Enter the 6 diigits code sent to\n',
+                          text: 'Enter the 6 digits code sent to\n',
                           style: Theme.of(context).textTheme.displayMedium,
                           children: <TextSpan>[
                             TextSpan(
-                              text: 'obc@xyz.com',
+                              text: email,
                               style: TextStyle(
                                 color: Theme.of(context)
                                     .colorScheme
@@ -217,7 +369,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                           ),
                           onSaved: (value) {
-                            email = value;
+                            setState(() {
+                              email = value;
+                            });
                           },
                         ),
                         const SizedBox(
@@ -225,8 +379,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         ),
                         TextButton(
                           onPressed: () {
-                            formKey.currentState!.save();
-                            // TODO: make api call to login user
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              final Map<String, dynamic>
+                                  startPasswordRecoveryData = {
+                                'email': email,
+                              };
+                              startPasswordRecovery(startPasswordRecoveryData);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Please enter a valid email address',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  showCloseIcon: true,
+                                  closeIconColor: Colors.white,
+                                  duration: Duration(seconds: 5),
+                                ),
+                              );
+                            }
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll(
@@ -245,7 +417,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               horizontal: 80,
                               vertical: 10,
                             ),
-                            child: loading
+                            child: verifyingEmail
                                 ? const CircularProgressIndicator.adaptive(
                                     backgroundColor: Colors.white,
                                   )
@@ -279,7 +451,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           // print(code);
                         },
                         //runs when every textfield is filled
-                        onSubmit: (verificationCode) {}, // end onSubmit
+                        onSubmit: (verificationCode) {
+                          setState(() {
+                            otp = verificationCode;
+                            currentStep = 3;
+                          });
+                        }, // end onSubmit
                       )
                     : Form(
                         key: formKey2,
@@ -423,19 +600,33 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               height: 30,
                             ),
                             TextButton(
-                              onPressed: loading
+                              onPressed: restingPassword
                                   ? null
                                   : () {
                                       if (formKey2.currentState!.validate()) {
+                                        formKey2.currentState!.save();
+                                        final Map<String, dynamic>
+                                            resetPasswordData = {
+                                          'email': email,
+                                          'otp': otp,
+                                          'otp_verification_key':
+                                              otpVerificationKey,
+                                          'new_password': password,
+                                          'confirm_password': confirmPassword,
+                                        };
+                                        resetPassword(resetPasswordData);
                                       } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           const SnackBar(
                                             content: Text(
-                                              'invalid information somewhere',
+                                              'Please enter a valid password',
                                               style: TextStyle(
                                                   color: Colors.white),
                                             ),
+                                            showCloseIcon: true,
+                                            closeIconColor: Colors.white,
+                                            duration: Duration(seconds: 5),
                                           ),
                                         );
                                       }
@@ -458,7 +649,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   horizontal: 45,
                                   vertical: 10,
                                 ),
-                                child: loading
+                                child: restingPassword
                                     ? const CircularProgressIndicator.adaptive(
                                         backgroundColor: Colors.white,
                                       )
@@ -504,7 +695,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     currentStep == 2
                         ? GestureDetector(
                             // trigger conditionally depending on Countdown state
-                            onTap: secondsRemaining == 0 && !loading
+                            onTap: email != '' &&
+                                    secondsRemaining == 0 &&
+                                    !resendingOTP
                                 ? () {
                                     final Map<String, dynamic> resendOTPData = {
                                       'channel': 'email',
