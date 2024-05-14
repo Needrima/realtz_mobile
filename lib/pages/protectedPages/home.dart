@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
+import 'package:realtz_mobile/providers/auth_provider.dart';
 import 'package:realtz_mobile/widgets/home/single_product.dart';
 
 class Home extends StatefulWidget {
@@ -28,7 +31,22 @@ class _HomeState extends State<Home> {
   ];
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!Provider.of<AuthProvider>(context).isLoggedIn) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            return const Login();
+          },
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // print(Provider.of<AuthProvider>(context).token);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(

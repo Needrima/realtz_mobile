@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
 import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
 import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
+import 'package:realtz_mobile/providers/auth_provider.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -11,6 +14,20 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   var currentStep = 1;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (Provider.of<AuthProvider>(context).isLoggedIn) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            return const ProtectedPages();
+          },
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

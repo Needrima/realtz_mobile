@@ -85,7 +85,10 @@ class _ProtectedPagesState extends State<ProtectedPages> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: _currentIndex == 0 ? Colors.black : Colors.white,
       ),
-      body: pages[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: pages,
+      ),
     );
   }
 }
