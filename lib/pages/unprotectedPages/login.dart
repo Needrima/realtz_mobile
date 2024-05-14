@@ -1,13 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/pages/unprotectedPages/forgot_password.dart';
 import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
 import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
 import 'package:http/http.dart' as http;
-import 'package:realtz_mobile/providers/auth_provider.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
 class Login extends StatefulWidget {
