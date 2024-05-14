@@ -37,7 +37,7 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) {
                         return const Login();
                       }),
@@ -58,7 +58,7 @@ class _LandingPageState extends State<LandingPage> {
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
-                      'skip',
+                      'Skip to login',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 16,

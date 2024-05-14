@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'CustomOpenSans',
         useMaterial3: true,
       ),
-      home: const ProtectedPages(),
+      home: const LandingPage(),
       debugShowCheckedModeBanner: false,
     );
   }

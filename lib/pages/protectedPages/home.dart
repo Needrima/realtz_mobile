@@ -10,13 +10,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final PageController pageController = PageController();
+  String currentTab = 'home';
 
-  List<Widget> pages = const [
-    SingleProduct(productTitle: 'Product 1'),
-    SingleProduct(productTitle: 'Product 2'),
-    SingleProduct(productTitle: 'Product 3'),
-    SingleProduct(productTitle: 'Product 4'),
-    SingleProduct(productTitle: 'Product 5'),
+  List<Widget> homeProducts = const [
+    SingleProduct(productTitle: 'Home Product 1'),
+    SingleProduct(productTitle: 'Home Product 2'),
+    SingleProduct(productTitle: 'Home Product 3'),
+    SingleProduct(productTitle: 'Home Product 4'),
+    SingleProduct(productTitle: 'Home Product 5'),
+  ];
+
+  List<Widget> trendingProducts = const [
+    SingleProduct(productTitle: 'Trending Product 1'),
+    SingleProduct(productTitle: 'Trending Product 2'),
+    SingleProduct(productTitle: 'Trending Product 3'),
+    SingleProduct(productTitle: 'Trending Product 4'),
   ];
 
   @override
@@ -32,11 +40,13 @@ class _HomeState extends State<Home> {
               onPageChanged: (index) {
                 print(index);
               },
-              itemCount: pages.length,
+              itemCount: currentTab == 'home'
+                  ? homeProducts.length
+                  : trendingProducts.length,
               itemBuilder: (context, index) {
-                return Center(
-                  child: pages[index],
-                );
+                return currentTab == 'home'
+                    ? homeProducts[index]
+                    : trendingProducts[index];
               },
             ),
             Positioned(
@@ -45,14 +55,29 @@ class _HomeState extends State<Home> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      print('switching to home products');
+                      setState(() {
+                        currentTab = 'home';
+                      });
                     },
-                    child: const Text(
-                      'Home',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                    child: Container(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: currentTab == 'home'
+                                ? Colors.white
+                                : Colors.black,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Home',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
@@ -61,14 +86,29 @@ class _HomeState extends State<Home> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print('switching to trending products');
+                      setState(() {
+                        currentTab = 'trending';
+                      });
                     },
-                    child: const Text(
-                      'Trending',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                    child: Container(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: currentTab == 'trending'
+                                ? Colors.white
+                                : Colors.black,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Trending',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
