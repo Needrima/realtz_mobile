@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
-import 'package:realtz_mobile/providers/auth_provider.dart';
+import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -12,9 +11,15 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!Provider.of<AuthProvider>(context).isLoggedIn) {
+  void initState() {
+    super.initState();
+    checkAuth();
+  }
+
+  void checkAuth() async {
+    final authData = await getAuthData();
+    if (!authData['isLoggedIn']) {
+      if (!context.mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
-import 'package:realtz_mobile/providers/auth_provider.dart';
+import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/signup/signup_form.dart';
 import 'package:realtz_mobile/widgets/signup/verify_email.dart';
 // import 'package:http/http.dart' as http;
@@ -18,11 +17,16 @@ class _SignupState extends State<Signup> {
   var currentStep = 1;
   var email = '';
   var otpVerificationKey = '';
-
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (Provider.of<AuthProvider>(context).isLoggedIn) {
+  void initState() {
+    super.initState();
+    // checkAuth();
+  }
+
+  void checkAuth() async {
+    final authData = await getAuthData();
+    if (authData['isLoggedIn']) {
+      if (!context.mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {

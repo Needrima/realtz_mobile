@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
-import 'package:realtz_mobile/providers/auth_provider.dart';
+import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/home/single_product.dart';
 
 class Home extends StatefulWidget {
@@ -14,6 +13,26 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final PageController pageController = PageController();
   String currentTab = 'home';
+
+  @override
+  void initState() {
+    super.initState();
+    checkAuth();
+  }
+
+  void checkAuth() async {
+    final authData = await getAuthData();
+    if (!authData['isLoggedIn']) {
+      if (!context.mounted) return;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            return const Login();
+          },
+        ),
+      );
+    }
+  }
 
   List<Widget> homeProducts = const [
     SingleProduct(productTitle: 'Home Product 1'),
@@ -29,20 +48,6 @@ class _HomeState extends State<Home> {
     SingleProduct(productTitle: 'Trending Product 3'),
     SingleProduct(productTitle: 'Trending Product 4'),
   ];
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!Provider.of<AuthProvider>(context).isLoggedIn) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return const Login();
-          },
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

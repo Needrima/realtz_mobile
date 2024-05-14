@@ -8,6 +8,7 @@ import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
 import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:realtz_mobile/providers/auth_provider.dart';
+import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -31,9 +32,15 @@ class _LoginState extends State<Login> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (Provider.of<AuthProvider>(context).isLoggedIn) {
+  void initState() {
+    super.initState();
+    // checkAuth();
+  }
+
+  void checkAuth() async {
+    final authData = await getAuthData();
+    if (authData['isLoggedIn']) {
+      if (!context.mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
@@ -76,11 +83,12 @@ class _LoginState extends State<Login> {
           ),
         );
       } else {
-        // print(body['user']);
-        // print(body['token']);
+        await authLogin({
+          'user': body['user'],
+          'token': body['token'],
+          'isLoggedIn': true,
+        });
         if (!context.mounted) return;
-        Provider.of<AuthProvider>(context, listen: false)
-            .login(body as Map<String, dynamic>);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
