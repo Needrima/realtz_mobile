@@ -57,21 +57,29 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Stack(
           children: [
-            PageView.builder(
-              controller: pageController,
-              scrollDirection: Axis.vertical,
-              onPageChanged: (index) {
-                print(index);
-              },
-              itemCount: currentTab == 'home'
-                  ? homeProducts.length
-                  : trendingProducts.length,
-              itemBuilder: (context, index) {
-                return currentTab == 'home'
-                    ? homeProducts[index]
-                    : trendingProducts[index];
-              },
-            ),
+            currentTab == 'home'
+                ? PageView.builder(
+                    controller: pageController,
+                    scrollDirection: Axis.vertical,
+                    onPageChanged: (index) {
+                      print(index);
+                    },
+                    itemCount: homeProducts.length,
+                    itemBuilder: (context, index) {
+                      return homeProducts[index];
+                    },
+                  )
+                : PageView.builder(
+                    controller: pageController,
+                    scrollDirection: Axis.vertical,
+                    onPageChanged: (index) {
+                      print(index);
+                    },
+                    itemCount: trendingProducts.length,
+                    itemBuilder: (context, index) {
+                      return trendingProducts[index];
+                    },
+                  ),
             Positioned(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +97,7 @@ class _HomeState extends State<Home> {
                           bottom: BorderSide(
                             color: currentTab == 'home'
                                 ? Colors.white
-                                : Colors.black,
+                                : Colors.transparent,
                             width: 2,
                           ),
                         ),
@@ -98,7 +106,7 @@ class _HomeState extends State<Home> {
                         'Home',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -120,7 +128,7 @@ class _HomeState extends State<Home> {
                           bottom: BorderSide(
                             color: currentTab == 'trending'
                                 ? Colors.white
-                                : Colors.black,
+                                : Colors.transparent,
                             width: 2,
                           ),
                         ),
@@ -129,7 +137,7 @@ class _HomeState extends State<Home> {
                         'Trending',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

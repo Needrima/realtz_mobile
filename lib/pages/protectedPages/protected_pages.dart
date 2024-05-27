@@ -54,11 +54,6 @@ class _ProtectedPagesState extends State<ProtectedPages> {
             tooltip: 'Profile',
           ),
         ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
         unselectedItemColor: _currentIndex == 0
             ? Colors.white
             : const Color.fromRGBO(34, 34, 34, 0.7),
@@ -84,6 +79,11 @@ class _ProtectedPagesState extends State<ProtectedPages> {
         // removing type property disables changing background color
         type: BottomNavigationBarType.fixed,
         backgroundColor: _currentIndex == 0 ? Colors.black : Colors.white,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
       body: IndexedStack(
         index: _currentIndex,
