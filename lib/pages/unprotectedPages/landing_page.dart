@@ -17,12 +17,13 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    // checkAuth();
+    checkAuth();
   }
 
   void checkAuth() async {
     final authData = await getAuthData();
-    if (authData['isLoggedIn']) {
+    final bool isLoggedIn = authData['isLoggedIn'] ?? false;
+    if (isLoggedIn) {
       if (!context.mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(

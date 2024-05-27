@@ -20,3 +20,8 @@ Future<Map<String, dynamic>> getAuthData() async {
     return body as Map<String, dynamic>;
   }
 }
+
+Future<void> authLogout() async {
+  final authPref = await SharedPreferences.getInstance();
+  authPref.remove(authInfoKey);
+}
