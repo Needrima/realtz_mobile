@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
 
   void checkAuth() async {
     final authData = await getAuthData();
-    if (!authData['isLoggedIn']) {
+    if (authData == {} || !authData['isLoggedIn']) {
       if (!context.mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
@@ -35,18 +35,17 @@ class _HomeState extends State<Home> {
   }
 
   List<Widget> homeProducts = const [
-    SingleProduct(productTitle: 'Home Product 1'),
-    SingleProduct(productTitle: 'Home Product 2'),
-    SingleProduct(productTitle: 'Home Product 3'),
-    SingleProduct(productTitle: 'Home Product 4'),
-    SingleProduct(productTitle: 'Home Product 5'),
+    SingleProduct(productId: 1),
+    SingleProduct(productId: 2),
+    SingleProduct(productId: 3),
+    SingleProduct(productId: 4),
   ];
 
   List<Widget> trendingProducts = const [
-    SingleProduct(productTitle: 'Trending Product 1'),
-    SingleProduct(productTitle: 'Trending Product 2'),
-    SingleProduct(productTitle: 'Trending Product 3'),
-    SingleProduct(productTitle: 'Trending Product 4'),
+    SingleProduct(productId: 1),
+    SingleProduct(productId: 2),
+    SingleProduct(productId: 3),
+    SingleProduct(productId: 4),
   ];
 
   @override
@@ -58,28 +57,40 @@ class _HomeState extends State<Home> {
         child: Stack(
           children: [
             currentTab == 'home'
-                ? PageView.builder(
-                    controller: pageController,
-                    scrollDirection: Axis.vertical,
-                    onPageChanged: (index) {
-                      print(index);
-                    },
-                    itemCount: homeProducts.length,
-                    itemBuilder: (context, index) {
-                      return homeProducts[index];
-                    },
-                  )
-                : PageView.builder(
-                    controller: pageController,
-                    scrollDirection: Axis.vertical,
-                    onPageChanged: (index) {
-                      print(index);
-                    },
-                    itemCount: trendingProducts.length,
-                    itemBuilder: (context, index) {
-                      return trendingProducts[index];
-                    },
-                  ),
+                ? homeProducts.isNotEmpty
+                    ? PageView.builder(
+                        controller: pageController,
+                        scrollDirection: Axis.vertical,
+                        onPageChanged: (index) {
+                          print(index);
+                        },
+                        itemCount: homeProducts.length,
+                        itemBuilder: (context, index) {
+                          return homeProducts[index];
+                        },
+                      )
+                    : const Center(
+                        child: CircularProgressIndicator.adaptive(
+                          backgroundColor: Colors.white,
+                        ),
+                      )
+                : trendingProducts.isNotEmpty
+                    ? PageView.builder(
+                        controller: pageController,
+                        scrollDirection: Axis.vertical,
+                        onPageChanged: (index) {
+                          print(index);
+                        },
+                        itemCount: trendingProducts.length,
+                        itemBuilder: (context, index) {
+                          return trendingProducts[index];
+                        },
+                      )
+                    : const Center(
+                        child: CircularProgressIndicator.adaptive(
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
             Positioned(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

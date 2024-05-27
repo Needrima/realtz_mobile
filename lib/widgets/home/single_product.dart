@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SingleProduct extends StatefulWidget {
-  final String productTitle;
-  const SingleProduct({super.key, required this.productTitle});
+  final int productId;
+  const SingleProduct({super.key, required this.productId});
 
   @override
   State<SingleProduct> createState() => _SingleProductState();
@@ -10,21 +10,6 @@ class SingleProduct extends StatefulWidget {
 
 class _SingleProductState extends State<SingleProduct> {
   final PageController pageController = PageController();
-
-  List<Widget> images = [
-    Image.asset(
-      'assets/images/product1-1.jpg',
-      width: double.infinity,
-    ),
-    Image.asset(
-      'assets/images/product1-2.jpg',
-      width: double.infinity,
-    ),
-    Image.asset(
-      'assets/images/product1-3.jpg',
-      width: double.infinity,
-    ),
-  ];
 
   @override
   void initState() {
@@ -38,6 +23,20 @@ class _SingleProductState extends State<SingleProduct> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> images = [
+      Image.asset(
+        'assets/images/product${widget.productId}-1.jpg',
+        width: double.infinity,
+      ),
+      Image.asset(
+        'assets/images/product${widget.productId}-2.jpg',
+        width: double.infinity,
+      ),
+      Image.asset(
+        'assets/images/product${widget.productId}-3.jpg',
+        width: double.infinity,
+      ),
+    ];
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -131,12 +130,25 @@ class _SingleProductState extends State<SingleProduct> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                )
+                ),
+                GestureDetector(
+                  onTap: () {
+                    print('view more');
+                  },
+                  child: Text(
+                    'more',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
