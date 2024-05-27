@@ -91,7 +91,7 @@ class _SingleProductState extends State<SingleProduct> {
                   height: 16,
                 ),
                 Icon(
-                  Icons.save,
+                  Icons.save_outlined,
                   color: Colors.white,
                   size: 32,
                 ),
