@@ -10,6 +10,9 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  final TextEditingController _searchInputController = TextEditingController();
+  final bool loading = false;
+
   @override
   void initState() {
     super.initState();
@@ -604,6 +607,25 @@ class _ExploreState extends State<Explore> {
                 ),
               ),
             ),
+            if (loading)
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 42,
+                ),
+                child: Opacity(
+                  opacity: 0.4,
+                  child: ModalBarrier(
+                    dismissible: false,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            if (loading)
+              const Center(
+                child: CircularProgressIndicator.adaptive(
+                  backgroundColor: Colors.white,
+                ),
+              ),
             Positioned(
               top: 0,
               child: Row(
@@ -612,6 +634,7 @@ class _ExploreState extends State<Explore> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     height: 40,
                     child: TextField(
+                      controller: _searchInputController,
                       decoration: InputDecoration(
                         hintText: 'search',
                         hintStyle: Theme.of(context).textTheme.labelMedium,
