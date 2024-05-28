@@ -66,11 +66,11 @@ class _ProtectedPagesState extends State<ProtectedPages> {
         ],
         unselectedItemColor: _currentIndex == 0
             ? Colors.white
-            : const Color.fromRGBO(34, 34, 34, 0.7),
+            : Theme.of(context).colorScheme.inversePrimary,
         unselectedLabelStyle: TextStyle(
           color: _currentIndex == 0
               ? Colors.white
-              : const Color.fromRGBO(34, 34, 34, 0.7),
+              : Theme.of(context).colorScheme.inversePrimary,
           fontSize: 10,
           fontWeight: FontWeight.w700,
         ),

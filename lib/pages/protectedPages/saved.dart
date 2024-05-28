@@ -54,23 +54,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -95,23 +99,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -136,23 +144,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -181,23 +193,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -222,23 +238,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -263,23 +283,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -308,23 +332,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -349,23 +377,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -390,23 +422,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -435,23 +471,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -476,23 +516,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -517,23 +561,27 @@ class _SavedState extends State<Saved> {
                               height: double.infinity,
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: 10,
                             right: 10,
                             child: Row(
                               children: [
                                 Icon(
                                   Icons.favorite,
-                                  color: Colors.black,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
                                   size: 18,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 2,
                                 ),
                                 Text(
                                   '2k',
                                   style: TextStyle(
-                                    // color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
