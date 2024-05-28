@@ -86,7 +86,7 @@ class _ProtectedPagesState extends State<ProtectedPages> {
         ),
         iconSize: 32,
         showUnselectedLabels: true,
-        // removing type property disables changing background color
+        // type property must be BottomNavigationBarType.fixed to enable changing background color
         type: BottomNavigationBarType.fixed,
         backgroundColor: _currentIndex == 0 ? Colors.black : Colors.white,
         onTap: (index) {

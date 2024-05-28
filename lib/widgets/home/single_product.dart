@@ -124,13 +124,16 @@ class _SingleProductState extends State<SingleProduct> {
                   ),
                 ),
                 const SizedBox(
-                  width: 222,
+                  height: 5,
+                ),
+                const SizedBox(
+                  width: 220,
                   child: Text(
                     '#realestate#parkinglot#swimmingpool#realestate#parkinglot#swimmingpool',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w700,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
