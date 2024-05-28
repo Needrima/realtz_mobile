@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/protectedPages/add_listing.dart';
 import 'package:realtz_mobile/pages/protectedPages/explore.dart';
 import 'package:realtz_mobile/pages/protectedPages/home.dart';
 import 'package:realtz_mobile/pages/protectedPages/inbox.dart';
@@ -18,37 +19,46 @@ class _ProtectedPagesState extends State<ProtectedPages> {
     Home(),
     Saved(),
     Explore(),
+    AddListing(),
     Inbox(),
     Profile(),
   ];
+
+  String userType = "agent";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home_rounded),
             label: 'Home',
             tooltip: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.save),
             label: 'Saved',
             tooltip: 'Saved',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.explore),
             label: 'Explore',
             tooltip: 'Explore',
           ),
-          BottomNavigationBarItem(
+          if (userType == 'agent')
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_rounded),
+              label: 'Add Listing',
+              tooltip: 'Add Listing',
+            ),
+          const BottomNavigationBarItem(
             icon: Icon(Icons.inbox_rounded),
             label: 'Inbox',
             tooltip: 'Inbox',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.person_rounded),
             label: 'Profile',
             tooltip: 'Profile',
