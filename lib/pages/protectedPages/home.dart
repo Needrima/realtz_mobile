@@ -11,8 +11,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final PageController pageController = PageController();
+  final PageController homePageController = PageController();
+  final PageController trendingPageController = PageController();
   String currentTab = 'home';
+  bool loading = false;
 
   @override
   void initState() {
@@ -60,10 +62,16 @@ class _HomeState extends State<Home> {
             currentTab == 'home'
                 ? homeProducts.isNotEmpty
                     ? PageView.builder(
-                        controller: pageController,
+                        controller: homePageController,
                         scrollDirection: Axis.vertical,
-                        onPageChanged: (index) {
-                          print(index);
+                        onPageChanged: (int index) {
+                          final int currentPage = index + 1;
+                          if (homeProducts.length - currentPage < 2) {
+                            setState(() {
+                              loading = true;
+                            });
+                            print('fetching more home products...');
+                          }
                         },
                         itemCount: homeProducts.length,
                         itemBuilder: (context, index) {
@@ -77,10 +85,16 @@ class _HomeState extends State<Home> {
                       )
                 : trendingProducts.isNotEmpty
                     ? PageView.builder(
-                        controller: pageController,
+                        controller: trendingPageController,
                         scrollDirection: Axis.vertical,
-                        onPageChanged: (index) {
-                          print(index);
+                        onPageChanged: (int index) {
+                          final int currentPage = index + 1;
+                          if (homeProducts.length - currentPage < 2) {
+                            setState(() {
+                              loading = true;
+                            });
+                            print('fetching more trending products...');
+                          }
                         },
                         itemCount: trendingProducts.length,
                         itemBuilder: (context, index) {
@@ -157,7 +171,13 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-            )
+            ),
+            if (loading)
+              const Center(
+                child: CircularProgressIndicator.adaptive(
+                  backgroundColor: Colors.black,
+                ),
+              ),
           ],
         ),
       ),
