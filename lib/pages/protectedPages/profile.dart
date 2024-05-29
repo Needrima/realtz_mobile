@@ -16,7 +16,7 @@ class _ProfileState extends State<Profile> {
     checkAuth();
   }
 
- void checkAuth() async {
+  void checkAuth() async {
     final authData = await getAuthData();
     final bool isLoggedIn = authData['isLoggedIn'] ?? false;
     if (!isLoggedIn) {
@@ -36,6 +36,16 @@ class _ProfileState extends State<Profile> {
     return const Scaffold(
       body: Center(
         child: Text('Profile page'),
+      ),
+      drawer: Drawer(
+        child: Column(children: [
+          Text(
+            'Settings',
+          ),
+          Text(
+            'Privacy',
+          ),
+        ]),
       ),
     );
   }

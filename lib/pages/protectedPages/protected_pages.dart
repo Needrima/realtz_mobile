@@ -34,39 +34,43 @@ class _ProtectedPagesState extends State<ProtectedPages> {
         items: [
           const BottomNavigationBarItem(
             icon: Icon(Icons.home_rounded),
+            activeIcon: Icon(Icons.home_outlined),
             label: 'Home',
             tooltip: 'Home',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.save),
+            activeIcon: Icon(Icons.save_outlined),
             label: 'Saved',
             tooltip: 'Saved',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.explore),
+            activeIcon: Icon(Icons.explore_outlined),
             label: 'Explore',
             tooltip: 'Explore',
           ),
           if (userType == 'agent')
             const BottomNavigationBarItem(
               icon: Icon(Icons.add_box_rounded),
+              activeIcon: Icon(Icons.add_box_outlined),
               label: 'Add Listing',
               tooltip: 'Add Listing',
             ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.inbox_rounded),
+            activeIcon: Icon(Icons.inbox_outlined),
             label: 'Inbox',
             tooltip: 'Inbox',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.person_rounded),
+            activeIcon: Icon(Icons.person_outlined),
             label: 'Profile',
             tooltip: 'Profile',
           ),
         ],
-        unselectedItemColor: _currentIndex == 0
-            ? Colors.white
-            : Theme.of(context).colorScheme.inversePrimary,
+        unselectedItemColor: _currentIndex == 0 ? Colors.white : Colors.black,
         unselectedLabelStyle: TextStyle(
           color: _currentIndex == 0
               ? Colors.white
@@ -74,13 +78,9 @@ class _ProtectedPagesState extends State<ProtectedPages> {
           fontSize: 10,
           fontWeight: FontWeight.w700,
         ),
-        selectedItemColor: _currentIndex == 0
-            ? Theme.of(context).colorScheme.inversePrimary
-            : Colors.black,
+        selectedItemColor: Theme.of(context).colorScheme.inversePrimary,
         selectedLabelStyle: TextStyle(
-          color: _currentIndex == 0
-              ? Theme.of(context).colorScheme.inversePrimary
-              : Colors.black,
+          color: Theme.of(context).colorScheme.inversePrimary,
           fontSize: 10,
           fontWeight: FontWeight.w700,
         ),

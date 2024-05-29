@@ -102,8 +102,18 @@ class _HomeState extends State<Home> {
                         },
                       )
                     : const Center(
-                        child: CircularProgressIndicator.adaptive(
-                          backgroundColor: Colors.white,
+                        child: Column(
+                          children: [
+                            CircularProgressIndicator.adaptive(
+                              backgroundColor: Colors.black,
+                            ),
+                            Text(
+                              "loading more content ...",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
             Positioned(
