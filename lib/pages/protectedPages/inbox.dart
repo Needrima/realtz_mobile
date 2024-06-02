@@ -95,7 +95,7 @@ class _InboxState extends State<Inbox> {
                             const Text(
                               'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, nostrum eius maiores labore vitae quibusdam recusandae molestias cupiditate in consequatur? A repellat iste sequi, odit neque asperiores quam, impedit debitis obcaecati totam tenetur laudantium? Dolores corporis cumque minima vero fugit.',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                             ),
                             const SizedBox(
@@ -116,10 +116,11 @@ class _InboxState extends State<Inbox> {
                       ),
                     );
                   },
-                  backgroundColor: Colors.black,
                   barrierColor: Colors.transparent,
+                  // set eleavtion to zero to make sure backgroundColor property works as expected
+                  elevation: 0,
+                  backgroundColor: Colors.white,
                   showDragHandle: true,
-                  elevation: 100,
                 );
               },
             );

@@ -66,11 +66,10 @@ class _HomeState extends State<Home> {
                         scrollDirection: Axis.vertical,
                         onPageChanged: (int index) {
                           final int currentPage = index + 1;
-                          if (homeProducts.length - currentPage < 2) {
+                          if (homeProducts.length - currentPage < 1) {
                             setState(() {
                               loading = true;
                             });
-                            print('fetching more home products...');
                           }
                         },
                         itemCount: homeProducts.length,
@@ -175,18 +174,10 @@ class _HomeState extends State<Home> {
             if (loading)
               const Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CircularProgressIndicator.adaptive(
-                      backgroundColor: Colors.black,
-                    ),
-                    Text(
-                      'loading more content ...',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 32,
-                      ),
+                      backgroundColor: Colors.white,
                     ),
                   ],
                 ),
