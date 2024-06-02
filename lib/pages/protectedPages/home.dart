@@ -102,18 +102,8 @@ class _HomeState extends State<Home> {
                         },
                       )
                     : const Center(
-                        child: Column(
-                          children: [
-                            CircularProgressIndicator.adaptive(
-                              backgroundColor: Colors.black,
-                            ),
-                            Text(
-                              "loading more content ...",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
+                        child: CircularProgressIndicator.adaptive(
+                          backgroundColor: Colors.white,
                         ),
                       ),
             Positioned(
@@ -184,8 +174,21 @@ class _HomeState extends State<Home> {
             ),
             if (loading)
               const Center(
-                child: CircularProgressIndicator.adaptive(
-                  backgroundColor: Colors.black,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator.adaptive(
+                      backgroundColor: Colors.black,
+                    ),
+                    Text(
+                      'loading more content ...',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 32,
+                      ),
+                    ),
+                  ],
                 ),
               ),
           ],

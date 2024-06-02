@@ -33,9 +33,104 @@ class _InboxState extends State<Inbox> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Inbox page'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Inbox',
+          style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+        shadowColor: Colors.white,
+        surfaceTintColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(6),
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(
+                'Realtz login',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, nostrum eius maiores labore vitae quibusdam recusandae molestias cupiditate in consequatur? A repellat iste sequi, odit neque asperiores quam, impedit debitis obcaecati totam tenetur laudantium? Dolores corporis cumque minima vero fugit.',
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    '02-01-2024 6:30pm',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              tileColor: const Color.fromRGBO(34, 34, 34, 0.05),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, nostrum eius maiores labore vitae quibusdam recusandae molestias cupiditate in consequatur? A repellat iste sequi, odit neque asperiores quam, impedit debitis obcaecati totam tenetur laudantium? Dolores corporis cumque minima vero fugit.',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              '02-01-2024 6:30pm',
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  backgroundColor: Colors.black,
+                  barrierColor: Colors.transparent,
+                  showDragHandle: true,
+                  elevation: 100,
+                );
+              },
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const SizedBox(
+              height: 10,
+            );
+          },
+          itemCount: 10,
+        ),
       ),
     );
   }
