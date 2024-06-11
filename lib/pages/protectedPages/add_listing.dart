@@ -16,7 +16,7 @@ class _AddListingState extends State<AddListing> {
     checkAuth();
   }
 
- void checkAuth() async {
+  void checkAuth() async {
     final authData = await getAuthData();
     final bool isLoggedIn = authData['isLoggedIn'] ?? false;
     if (!isLoggedIn) {
@@ -34,8 +34,10 @@ class _AddListingState extends State<AddListing> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Add listing page'),
+      body: SafeArea(
+        child: Text(
+          'Add listing page',
+        ),
       ),
     );
   }

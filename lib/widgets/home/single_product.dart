@@ -96,6 +96,8 @@ class _SingleProductState extends State<SingleProduct> {
                         ],
                       ),
                       trailing: PopupMenuButton(
+                        color: Colors.black,
+                        elevation: 20,
                         icon: const Icon(Icons.more_vert),
                         onSelected: (result) {
                           // Handle the menu selection
@@ -107,8 +109,8 @@ class _SingleProductState extends State<SingleProduct> {
                             child: Text(
                               'Edit',
                               style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                              ),
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white),
                             ),
                           ),
                           const PopupMenuItem(
@@ -117,6 +119,7 @@ class _SingleProductState extends State<SingleProduct> {
                               'Delete',
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -284,6 +287,8 @@ class _SingleProductState extends State<SingleProduct> {
                         ],
                       ),
                       trailing: PopupMenuButton(
+                        color: Colors.black,
+                        elevation: 20,
                         icon: const Icon(Icons.more_vert),
                         onSelected: (result) {
                           // Handle the menu selection
@@ -296,6 +301,7 @@ class _SingleProductState extends State<SingleProduct> {
                               'Edit',
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -305,6 +311,7 @@ class _SingleProductState extends State<SingleProduct> {
                               'Delete',
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
+                                color: Colors.white,
                               ),
                             ),
                           ),
