@@ -36,25 +36,17 @@ class _AddListingState extends State<AddListing> {
 
   final ImagePicker _picker = ImagePicker();
   List<XFile>? _imageFileList = [];
-  XFile? _singleFile;
 
-  Future<void> _pickImages({bool isCamera = false}) async {
-    if (isCamera) {
-      final XFile? file = await _picker.pickImage(source: ImageSource.camera);
+  Future<void> _pickImages() async {
+    final List<XFile>? selectedImages = await _picker.pickMultiImage();
+    if (selectedImages != null) {
       setState(() {
-        _singleFile = file;
+        if (selectedImages.length > 3) {
+          _imageFileList = selectedImages.sublist(0, 3);
+        } else {
+          _imageFileList = selectedImages;
+        }
       });
-    } else {
-      final List<XFile>? selectedImages = await _picker.pickMultiImage();
-      if (selectedImages != null) {
-        setState(() {
-          if (selectedImages.length > 3) {
-            _imageFileList = selectedImages.sublist(0, 3);
-          } else {
-            _imageFileList = selectedImages;
-          }
-        });
-      }
     }
   }
 
@@ -65,7 +57,7 @@ class _AddListingState extends State<AddListing> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 _pickImages();
               },
@@ -83,29 +75,8 @@ class _AddListingState extends State<AddListing> {
               ),
               child: const Text(
                 'Choose images',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            const Text('or'),
-            TextButton(
-              onPressed: () {
-                _pickImages(isCamera: true);
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(
-                  Theme.of(context).colorScheme.inversePrimary,
-                ),
-                shape: const MaterialStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                  ),
-                ),
-              ),
-              child: const Text(
-                'Capture images',
-                style: TextStyle(color: Colors.white),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
               ),
             ),
             _imageFileList != null
@@ -118,18 +89,21 @@ class _AddListingState extends State<AddListing> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: 1.0,
-                            color: Theme.of(context).colorScheme.inversePrimary,
+                            color: Colors.black,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Stack(
                           alignment: AlignmentDirectional.bottomEnd,
                           children: [
-                            Image.file(
-                              File(image.value.path),
-                              fit: BoxFit.cover,
-                              width: 100,
-                              height: 100,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.file(
+                                File(image.value.path),
+                                fit: BoxFit.cover,
+                                width: 100,
+                                height: 100,
+                              ),
                             ),
                             IconButton(
                               onPressed: () {
@@ -147,42 +121,31 @@ class _AddListingState extends State<AddListing> {
                       );
                     }).toList(),
                   )
-                : _singleFile != null
-                    ? Container(
-                        margin: EdgeInsets.all(8.0),
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1.0,
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            Image.file(
-                              File(_singleFile!.path),
-                              fit: BoxFit.cover,
-                              width: 100,
-                              height: 100,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _singleFile = null;
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const Text('No images selected'),
+                : const Text('No images selected'),
+            if (_imageFileList != null && _imageFileList!.isNotEmpty)
+              ElevatedButton(
+                onPressed: () {
+                  print('going to next');
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                    Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  shape: const MaterialStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+                child: SizedBox(
+                  child: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
