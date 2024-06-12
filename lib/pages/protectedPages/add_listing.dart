@@ -36,17 +36,25 @@ class _AddListingState extends State<AddListing> {
 
   final ImagePicker _picker = ImagePicker();
   List<XFile>? _imageFileList = [];
+  XFile? _singleFile;
 
-  Future<void> _pickImages() async {
-    final List<XFile>? selectedImages = await _picker.pickMultiImage();
-    if (selectedImages != null) {
+  Future<void> _pickImages({bool isCamera = false}) async {
+    if (isCamera) {
+      final XFile? file = await _picker.pickImage(source: ImageSource.camera);
       setState(() {
-        if (selectedImages.length > 3) {
-          _imageFileList = selectedImages.sublist(0, 3);
-        } else {
-          _imageFileList = selectedImages;
-        }
+        _singleFile = file;
       });
+    } else {
+      final List<XFile>? selectedImages = await _picker.pickMultiImage();
+      if (selectedImages != null) {
+        setState(() {
+          if (selectedImages.length > 3) {
+            _imageFileList = selectedImages.sublist(0, 3);
+          } else {
+            _imageFileList = selectedImages;
+          }
+        });
+      }
     }
   }
 
@@ -58,7 +66,9 @@ class _AddListingState extends State<AddListing> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-              onPressed: _pickImages,
+              onPressed: () {
+                _pickImages();
+              },
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(
                   Theme.of(context).colorScheme.inversePrimary,
@@ -79,7 +89,7 @@ class _AddListingState extends State<AddListing> {
             const Text('or'),
             TextButton(
               onPressed: () {
-                print('pressed');
+                _pickImages(isCamera: true);
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(
@@ -123,16 +133,13 @@ class _AddListingState extends State<AddListing> {
                             ),
                             IconButton(
                               onPressed: () {
-                                print('deleting ${image.key}');
                                 setState(() {
                                   _imageFileList!.removeAt(image.key);
                                 });
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.delete,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inversePrimary,
+                                color: Colors.black,
                               ),
                             ),
                           ],
@@ -140,7 +147,42 @@ class _AddListingState extends State<AddListing> {
                       );
                     }).toList(),
                   )
-                : const Text('No images selected'),
+                : _singleFile != null
+                    ? Container(
+                        margin: EdgeInsets.all(8.0),
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1.0,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Stack(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          children: [
+                            Image.file(
+                              File(_singleFile!.path),
+                              fit: BoxFit.cover,
+                              width: 100,
+                              height: 100,
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _singleFile = null;
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : const Text('No images selected'),
           ],
         ),
       ),
