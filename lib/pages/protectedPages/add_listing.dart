@@ -463,7 +463,7 @@ class _AddListingState extends State<AddListing> {
                             TextFormField(
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                hintText: 'SHortlet Fee (nightly)',
+                                hintText: 'Shortlet Fee (nightly)',
                                 hintStyle:
                                     Theme.of(context).textTheme.labelMedium,
                                 prefixIcon: const Icon(
