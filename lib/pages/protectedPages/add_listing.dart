@@ -266,7 +266,7 @@ class _AddListingState extends State<AddListing> {
                               'Properties(comma seperated e.g: 5 bedrooms, \nswimming pool, parking lot, pets allowed)',
                           hintStyle: Theme.of(context).textTheme.labelMedium,
                           prefixIcon: const Icon(
-                            Icons.abc_rounded,
+                            Icons.interests_rounded,
                           ),
                           prefixIconColor:
                               Theme.of(context).colorScheme.inversePrimary,
@@ -303,7 +303,7 @@ class _AddListingState extends State<AddListing> {
                               'Hash tags(comma seperated e.g: #pets_allowed, \n#attic, #swimming pool)',
                           hintStyle: Theme.of(context).textTheme.labelMedium,
                           prefixIcon: const Icon(
-                            Icons.abc_rounded,
+                            Icons.tag_rounded,
                           ),
                           prefixIconColor:
                               Theme.of(context).colorScheme.inversePrimary,
@@ -338,7 +338,7 @@ class _AddListingState extends State<AddListing> {
                           hintText: 'Location e.g: V.I, Lagos',
                           hintStyle: Theme.of(context).textTheme.labelMedium,
                           prefixIcon: const Icon(
-                            Icons.abc_rounded,
+                            Icons.location_on_rounded,
                           ),
                           prefixIconColor:
                               Theme.of(context).colorScheme.inversePrimary,
@@ -373,7 +373,7 @@ class _AddListingState extends State<AddListing> {
                           hintText: 'Address e.g 14, John Doe Avenue',
                           hintStyle: Theme.of(context).textTheme.labelMedium,
                           prefixIcon: const Icon(
-                            Icons.abc_rounded,
+                            Icons.location_city_rounded,
                           ),
                           prefixIconColor:
                               Theme.of(context).colorScheme.inversePrimary,
