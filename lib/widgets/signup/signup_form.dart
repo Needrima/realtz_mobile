@@ -557,7 +557,8 @@ class _SignupFormState extends State<SignupForm> {
                             },
                       style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.inversePrimary),
+                          Theme.of(context).colorScheme.inversePrimary,
+                        ),
                         shape: const MaterialStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
