@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/signup/signup_form.dart';
 import 'package:realtz_mobile/widgets/signup/verify_email.dart';
@@ -31,7 +31,7 @@ class _SignupState extends State<Signup> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return const ProtectedPages();
+            return const BottomNavPages();
           },
         ),
       );

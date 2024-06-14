@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
+import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
 class AddListing extends StatefulWidget {

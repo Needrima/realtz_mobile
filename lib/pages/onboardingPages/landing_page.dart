@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
+import 'package:realtz_mobile/pages/onboardingPages/login.dart';
+import 'package:realtz_mobile/pages/onboardingPages/signup.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
 class LandingPage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _LandingPageState extends State<LandingPage> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return const ProtectedPages();
+            return const BottomNavPages();
           },
         ),
       );

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:realtz_mobile/pages/protectedPages/add_listing.dart';
-import 'package:realtz_mobile/pages/protectedPages/explore.dart';
-import 'package:realtz_mobile/pages/protectedPages/home.dart';
-import 'package:realtz_mobile/pages/protectedPages/inbox.dart';
-import 'package:realtz_mobile/pages/protectedPages/profile.dart';
-import 'package:realtz_mobile/pages/protectedPages/saved.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/add_listing.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/explore.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/home.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/inbox.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/profile.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/saved.dart';
 
-class ProtectedPages extends StatefulWidget {
-  const ProtectedPages({super.key});
+class BottomNavPages extends StatefulWidget {
+  const BottomNavPages({super.key});
 
   @override
-  State<ProtectedPages> createState() => _ProtectedPagesState();
+  State<BottomNavPages> createState() => _BottomNavPagesState();
 }
 
-class _ProtectedPagesState extends State<ProtectedPages> {
+class _BottomNavPagesState extends State<BottomNavPages> {
   int _currentIndex = 0;
   List<Widget> pages = const [
     Home(),

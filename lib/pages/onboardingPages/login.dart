@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/constants/constants.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/forgot_password.dart';
-import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
+import 'package:realtz_mobile/pages/onboardingPages/forgot_password.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
+import 'package:realtz_mobile/pages/onboardingPages/signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return const ProtectedPages();
+            return const BottomNavPages();
           },
         ),
       );
@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return const ProtectedPages();
+              return const BottomNavPages();
             },
           ),
         );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/landing_page.dart';
+import 'package:realtz_mobile/pages/onboardingPages/landing_page.dart';
 import 'package:realtz_mobile/providers/auth_provider.dart';
 
 void main() {

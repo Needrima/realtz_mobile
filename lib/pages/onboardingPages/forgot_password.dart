@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/misc/time_formatter.dart';
-import 'package:realtz_mobile/pages/protectedPages/protected_pages.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/login.dart';
-import 'package:realtz_mobile/pages/unprotectedPages/signup.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
+import 'package:realtz_mobile/pages/onboardingPages/login.dart';
+import 'package:realtz_mobile/pages/onboardingPages/signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
@@ -54,7 +54,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return const ProtectedPages();
+            return const BottomNavPages();
           },
         ),
       );
