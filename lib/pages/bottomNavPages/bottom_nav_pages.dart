@@ -57,9 +57,53 @@ class _BottomNavPagesState extends State<BottomNavPages> {
               label: 'Add Listing',
               tooltip: 'Add Listing',
             ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.inbox_rounded),
-            activeIcon: Icon(Icons.inbox_outlined),
+          BottomNavigationBarItem(
+            icon: Stack(
+              children: [
+                const Icon(Icons.inbox_rounded),
+                Positioned(
+                  top: -4,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text(
+                      '1',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            activeIcon: Stack(
+              children: [
+                const Icon(Icons.inbox_outlined),
+                Positioned(
+                  top: -4,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text(
+                      '1',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
             label: 'Inbox',
             tooltip: 'Inbox',
           ),
