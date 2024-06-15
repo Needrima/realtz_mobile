@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:realtz_mobile/pages/nonBottomNavPages/settings.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
@@ -30,6 +33,19 @@ class _ProfileState extends State<Profile> {
           },
         ),
       );
+    }
+  }
+
+  File? _image;
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
     }
   }
 
@@ -89,10 +105,13 @@ class _ProfileState extends State<Profile> {
                 Center(
                   child: Stack(
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 50.0,
-                        backgroundImage: AssetImage(
-                            'assets/images/default-avatar.jpg'), // Update with your image path
+                        backgroundImage: _image != null
+                            ? FileImage(_image!)
+                            : const AssetImage(
+                                    'assets/images/default-avatar.jpg')
+                                as ImageProvider, // Update with your image path
                       ),
                       Positioned(
                         bottom: 0,
@@ -104,9 +123,7 @@ class _ProfileState extends State<Profile> {
                             shape: BoxShape.circle,
                           ),
                           child: GestureDetector(
-                            onTap: () {
-                              print('editing image');
-                            },
+                            onTap: _pickImage,
                             child: const Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -250,402 +267,393 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                Stack(
+                const SizedBox(height: 20),
+                Row(
                   children: [
-                    SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product1-1.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product1-1.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
                               ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product1-2.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product1-3.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(
+                                    width: 2,
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product2-1.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product2-2.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product1-2.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product2-3.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(
+                                    width: 2,
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product2-1.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product2-2.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product1-3.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(2.5),
-                                  height: 150,
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          'assets/images/product2-3.jpg',
-                                          fit: BoxFit.cover,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        right: 10,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.favorite_border_rounded,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text(
-                                              '2k',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(
+                                    width: 2,
                                   ),
-                                ),
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product2-1.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product2-2.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product2-3.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product2-1.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product2-2.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/images/product2-3.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                              ),
+                            ),
+                            const Positioned(
+                              bottom: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Text(
+                                    '2k',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
