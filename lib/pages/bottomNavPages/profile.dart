@@ -15,6 +15,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool loading = false;
+  bool showFullBio = false;
   @override
   void initState() {
     super.initState();
@@ -253,7 +254,29 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
+                Text(
+                  'Bala blu garri pdapc garri bala corn bulaba corn bulaba our highway umbreleda blu 50million umbreleda eneme eba youths roasted mpower bala electricty eneme down-payment broooom from broooom generated garri pdapc roasted different eba electricty bala 50million symbol roasted blu tia-tia recruit different from umbreleda highway our blu roasted roasted different highway electricty generated bala bala eba super generated tia-tia from from eneme pdapc bulaba townhall symbol garri electricty bulaba blu electricty our army symbol umbreleda youths townhall highway pdapc super townhall bala generated our army super from highway line roasted eba line blu bulaba line eba umbreleda different bala',
+                  maxLines: showFullBio ? null : 3,
+                  overflow: showFullBio
+                      ? TextOverflow.visible
+                      : TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      showFullBio = !showFullBio;
+                    });
+                  },
+                  child: Text(
+                    'show ${showFullBio ? 'less' : 'more'}',
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(height: 30),
                 const Row(
                   children: [
                     Text(
