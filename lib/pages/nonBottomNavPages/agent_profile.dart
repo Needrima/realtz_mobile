@@ -36,18 +36,6 @@ class _AgentProfileState extends State<AgentProfile> {
     }
   }
 
-  File? _image;
-  Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,37 +57,12 @@ class _AgentProfileState extends State<AgentProfile> {
                 const SizedBox(
                   height: 10,
                 ),
-                Center(
-                  child: GestureDetector(
-                    onTap: _pickImage,
-                    child: Stack(
-                      children: [
-                        CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage: _image != null
-                              ? FileImage(_image!)
-                              : const AssetImage(
-                                      'assets/images/default-avatar.jpg')
-                                  as ImageProvider, // Update with your image path
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: const BoxDecoration(
-                              color: Colors.blue,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                const Center(
+                  child: CircleAvatar(
+                    radius: 50.0,
+                    backgroundImage: AssetImage(
+                      'assets/images/default-avatar.jpg',
+                    ), // Update with your image path
                   ),
                 ),
                 const SizedBox(
