@@ -39,7 +39,16 @@ class _AgentProfileState extends State<AgentProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        surfaceTintColor: Colors.white,
+        title: Text(
+          'Agents Profile',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -47,16 +56,6 @@ class _AgentProfileState extends State<AgentProfile> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                const Text(
-                  'Agents Profile',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
                 const Center(
                   child: CircleAvatar(
                     radius: 50.0,

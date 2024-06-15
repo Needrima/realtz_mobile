@@ -52,6 +52,31 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            padding: const EdgeInsets.all(3),
+            style: const ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(
+                Color.fromRGBO(244, 244, 244, 1),
+              ),
+            ),
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const Settings()));
+            },
+          ),
+        ],
+        surfaceTintColor: Colors.white,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -59,46 +84,6 @@ class _ProfileState extends State<Profile> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                const SizedBox(
-                  height: 25,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Placeholder for alignment, no content on the left
-                    // width is 48 to match default width of right icon
-                    const SizedBox(width: 48.0),
-
-                    // Centered Profile text
-                    const Expanded(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Profile',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    // Settings icon on the right
-                    IconButton(
-                      padding: const EdgeInsets.all(3),
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          Color.fromRGBO(244, 244, 244, 1),
-                        ),
-                      ),
-                      icon: const Icon(Icons.settings),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const Settings()));
-                      },
-                    ),
-                  ],
-                ),
                 const SizedBox(
                   height: 10,
                 ),
