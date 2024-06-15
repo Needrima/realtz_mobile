@@ -69,7 +69,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -111,7 +111,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -153,7 +153,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -199,7 +199,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -241,7 +241,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -283,7 +283,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -329,7 +329,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -371,7 +371,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -413,7 +413,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -459,7 +459,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -501,7 +501,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),
@@ -543,7 +543,7 @@ class _ExploreState extends State<Explore> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.favorite_border_rounded,
+                                        Icons.favorite_rounded,
                                         color: Colors.white,
                                         size: 22,
                                       ),

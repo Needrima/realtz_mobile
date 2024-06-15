@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/home.dart';
 import 'package:realtz_mobile/pages/nonBottomNavPages/agent_profile.dart';
 
 class SingleProduct extends StatefulWidget {
@@ -13,6 +14,7 @@ class _SingleProductState extends State<SingleProduct> {
   final PageController pageController = PageController();
   final TextEditingController _commentInputController = TextEditingController();
   bool liked = false;
+  String currentRoute = '/home';
 
   void showComments() {
     showModalBottomSheet(
@@ -432,6 +434,7 @@ class _SingleProductState extends State<SingleProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final parentType = getParentWidgetType(context);
     List<Widget> images = [
       Image.asset(
         'assets/images/product${widget.productId}-1.jpg',
@@ -448,6 +451,11 @@ class _SingleProductState extends State<SingleProduct> {
     ];
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+      ),
       body: Stack(
         children: [
           PageView.builder(
@@ -458,7 +466,20 @@ class _SingleProductState extends State<SingleProduct> {
             },
             itemCount: images.length,
             itemBuilder: (context, index) {
-              return images[index];
+              return GestureDetector(
+                onTap: () {
+                  if (parentType != null) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SingleProduct(
+                          productId: widget.productId,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                child: images[index],
+              );
             },
           ),
           Positioned(
@@ -605,4 +626,13 @@ class _SingleProductState extends State<SingleProduct> {
       ),
     );
   }
+}
+
+// Helper function to find the parent widget type
+Type? getParentWidgetType(BuildContext context) {
+  final parentElement = context.findAncestorWidgetOfExactType<Home>();
+  if (parentElement != null) {
+    return parentElement.runtimeType;
+  }
+  return null;
 }
