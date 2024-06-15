@@ -2,18 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:realtz_mobile/pages/nonBottomNavPages/settings.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class AgentProfile extends StatefulWidget {
+  const AgentProfile({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<AgentProfile> createState() => _AgentProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _AgentProfileState extends State<AgentProfile> {
   bool loading = false;
   bool showFullBio = false;
   @override
@@ -52,6 +51,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -59,45 +59,12 @@ class _ProfileState extends State<Profile> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                const SizedBox(
-                  height: 25,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Placeholder for alignment, no content on the left
-                    // width is 48 to match default width of right icon
-                    const SizedBox(width: 48.0),
-
-                    // Centered Profile text
-                    const Expanded(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Profile',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    // Settings icon on the right
-                    IconButton(
-                      padding: const EdgeInsets.all(3),
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          Color.fromRGBO(244, 244, 244, 1),
-                        ),
-                      ),
-                      icon: const Icon(Icons.settings),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const Settings()));
-                      },
-                    ),
-                  ],
+                const Text(
+                  'Agents Profile',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -164,6 +131,19 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 10,
                 ),
+                Center(
+                  child: Text(
+                    'Follow',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -197,7 +177,7 @@ class _ProfileState extends State<Profile> {
                                 height: 8,
                               ),
                               const Text(
-                                'Liked listings',
+                                'Total listings',
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
@@ -240,7 +220,50 @@ class _ProfileState extends State<Profile> {
                                 height: 8,
                               ),
                               const Text(
-                                'Saved listings',
+                                'Followers',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(34, 34, 34, 1),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                        ),
+                        width: double.infinity,
+                        height: 88,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '3k',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .inversePrimary,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              const Text(
+                                'Likes',
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
@@ -280,7 +303,7 @@ class _ProfileState extends State<Profile> {
                 const Row(
                   children: [
                     Text(
-                      'Recently liked listings',
+                      'Latest listings',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 16,

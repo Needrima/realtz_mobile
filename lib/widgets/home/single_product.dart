@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/pages/nonBottomNavPages/agent_profile.dart';
 
 class SingleProduct extends StatefulWidget {
   final int productId;
@@ -465,10 +466,16 @@ class _SingleProductState extends State<SingleProduct> {
             bottom: 40,
             child: Column(
               children: [
-                const Icon(
-                  Icons.person_rounded,
-                  color: Colors.white,
-                  size: 32,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AgentProfile()));
+                  },
+                  child: const Icon(
+                    Icons.person_rounded,
+                    color: Colors.white,
+                    size: 32,
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
