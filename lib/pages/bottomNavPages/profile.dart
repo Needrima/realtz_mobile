@@ -312,7 +312,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -354,7 +354,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -396,7 +396,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -442,7 +442,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -484,7 +484,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -526,7 +526,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -572,7 +572,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -614,7 +614,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),
@@ -656,7 +656,7 @@ class _ProfileState extends State<Profile> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.favorite_border_rounded,
+                                    Icons.favorite_rounded,
                                     color: Colors.white,
                                     size: 22,
                                   ),

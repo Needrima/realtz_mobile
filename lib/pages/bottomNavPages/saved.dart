@@ -63,7 +63,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -105,7 +105,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -147,7 +147,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -193,7 +193,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -235,7 +235,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -277,7 +277,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -323,7 +323,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -365,7 +365,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -407,7 +407,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -453,7 +453,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -495,7 +495,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -537,7 +537,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -583,7 +583,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -625,7 +625,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -667,7 +667,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -713,7 +713,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -755,7 +755,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -797,7 +797,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -843,7 +843,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -885,7 +885,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -927,7 +927,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -973,7 +973,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -1015,7 +1015,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
@@ -1057,7 +1057,7 @@ class _SavedState extends State<Saved> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.favorite_border_rounded,
+                                      Icons.favorite_rounded,
                                       color: Colors.white,
                                       size: 22,
                                     ),
