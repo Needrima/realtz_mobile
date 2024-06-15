@@ -103,27 +103,27 @@ class _ProfileState extends State<Profile> {
                   height: 10,
                 ),
                 Center(
-                  child: Stack(
-                    children: [
-                      CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: _image != null
-                            ? FileImage(_image!)
-                            : const AssetImage(
-                                    'assets/images/default-avatar.jpg')
-                                as ImageProvider, // Update with your image path
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: const BoxDecoration(
-                            color: Colors.blue,
-                            shape: BoxShape.circle,
-                          ),
-                          child: GestureDetector(
-                            onTap: _pickImage,
+                  child: GestureDetector(
+                    onTap: _pickImage,
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 50.0,
+                          backgroundImage: _image != null
+                              ? FileImage(_image!)
+                              : const AssetImage(
+                                      'assets/images/default-avatar.jpg')
+                                  as ImageProvider, // Update with your image path
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
                             child: const Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -131,8 +131,8 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(
