@@ -11,6 +11,7 @@ class SingleProduct extends StatefulWidget {
 class _SingleProductState extends State<SingleProduct> {
   final PageController pageController = PageController();
   final TextEditingController _commentInputController = TextEditingController();
+  bool liked = false;
 
   void showComments() {
     showModalBottomSheet(
@@ -474,11 +475,15 @@ class _SingleProductState extends State<SingleProduct> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('liking');
+                    setState(() {
+                      liked = !liked;
+                    });
                   },
-                  child: const Icon(
+                  child: Icon(
                     Icons.favorite,
-                    color: Colors.white,
+                    color: liked
+                        ? Theme.of(context).colorScheme.inversePrimary
+                        : Colors.white,
                     // color: Theme.of(context).colorScheme.inversePrimary,
                     size: 32,
                   ),
@@ -513,10 +518,13 @@ class _SingleProductState extends State<SingleProduct> {
                 const SizedBox(
                   height: 16,
                 ),
-                const Icon(
-                  Icons.share_rounded,
-                  color: Colors.white,
-                  size: 32,
+                GestureDetector(
+                  onTap: () {},
+                  child: const Icon(
+                    Icons.share_rounded,
+                    color: Colors.white,
+                    size: 32,
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
