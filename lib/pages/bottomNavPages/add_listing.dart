@@ -44,8 +44,8 @@ class _AddListingState extends State<AddListing> {
     final List<XFile>? selectedImages = await _picker.pickMultiImage();
     if (selectedImages != null) {
       setState(() {
-        if (selectedImages.length > 3) {
-          _imageFileList = selectedImages.sublist(0, 3);
+        if (selectedImages.length > 10) {
+          _imageFileList = selectedImages.sublist(0, 10);
         } else {
           _imageFileList = selectedImages;
         }
@@ -83,6 +83,7 @@ class _AddListingState extends State<AddListing> {
                             color: Colors.white, fontWeight: FontWeight.w700),
                       ),
                     ),
+                    const Text('maximum of 10 images'),
                     _imageFileList != null
                         ? Wrap(
                             children:
@@ -94,12 +95,13 @@ class _AddListingState extends State<AddListing> {
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     width: 1.0,
-                                    color: Colors.black,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Stack(
-                                  alignment: AlignmentDirectional.bottomEnd,
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
@@ -110,15 +112,21 @@ class _AddListingState extends State<AddListing> {
                                         height: 100,
                                       ),
                                     ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _imageFileList!.removeAt(image.key);
-                                        });
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        color: Colors.black,
+                                    Positioned(
+                                      bottom: -10,
+                                      right: -13,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _imageFileList!.removeAt(image.key);
+                                          });
+                                        },
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                        ),
                                       ),
                                     ),
                                   ],
