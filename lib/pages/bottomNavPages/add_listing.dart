@@ -89,7 +89,7 @@ class _AddListingState extends State<AddListing> {
                             children:
                                 _imageFileList!.asMap().entries.map((image) {
                               return Container(
-                                margin: EdgeInsets.all(8.0),
+                                margin: const EdgeInsets.all(8.0),
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
