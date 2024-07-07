@@ -18,7 +18,6 @@ class _BottomNavPagesState extends State<BottomNavPages> {
   List<Widget> pages = const [
     Home(),
     Saved(),
-    // Explore(),
     AddListing(),
     Inbox(),
     Profile(),

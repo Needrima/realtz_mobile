@@ -5,12 +5,25 @@ import 'package:realtz_mobile/widgets/galleryRow/gallery_row.dart';
 
 class ExploreSearchDelegate extends SearchDelegate {
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return theme.copyWith(
+      textTheme: theme.textTheme.copyWith(
+        titleLarge: const TextStyle(
+          // Customize your search text style here
+          fontSize: 18.0,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.clear,
-          color: Theme.of(context).colorScheme.inversePrimary,
         ),
         onPressed: () {
           query = '';
