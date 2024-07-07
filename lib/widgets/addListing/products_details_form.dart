@@ -30,7 +30,6 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
             ],
           ),
         ),
-        shadowColor: Colors.white,
         surfaceTintColor: Colors.white,
       ),
       body: SingleChildScrollView(

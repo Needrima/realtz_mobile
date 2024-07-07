@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/home/single_product.dart';
-import 'package:realtz_mobile/widgets/explore/explore_search_delegate.dart';
+import 'package:realtz_mobile/widgets/home/search.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -193,7 +193,7 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       showSearch(
                         context: context,
-                        delegate: ExploreSearchDelegate(),
+                        delegate: HomeSearch(),
                       );
                     },
                     icon: const Icon(

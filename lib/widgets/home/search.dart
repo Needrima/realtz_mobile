@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:realtz_mobile/widgets/galleryRow/gallery_row.dart';
 import 'dart:async';
 
-class ExploreSearchDelegate extends SearchDelegate {
+class HomeSearch extends SearchDelegate {
   List<Widget> results = [
     // GalleryRow(),
   ];

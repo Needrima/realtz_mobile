@@ -41,7 +41,6 @@ class _InboxState extends State<Inbox> {
         ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.white,
-        shadowColor: Colors.white,
         surfaceTintColor: Colors.white,
       ),
       body: Padding(
