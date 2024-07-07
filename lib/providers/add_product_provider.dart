@@ -4,9 +4,10 @@ import 'package:image_picker/image_picker.dart';
 class AddProductProvider extends ChangeNotifier {
   bool forRent = false;
   bool forShortlet = false;
-  final ImagePicker _picker = ImagePicker();
   List<XFile>? imageFileList = [];
+  Map<String, dynamic> productDetails = {};
 
+  final ImagePicker _picker = ImagePicker();
   Future<void> pickImages() async {
     final List<XFile>? selectedImages = await _picker.pickMultiImage();
     if (selectedImages != null) {

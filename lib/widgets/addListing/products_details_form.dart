@@ -12,8 +12,22 @@ class ProductDetailsForm extends StatefulWidget {
 }
 
 class _ProductDetailsFormState extends State<ProductDetailsForm> {
+  final TextEditingController _titleInputController =
+      TextEditingController(text: 'Hello world');
+
+  @override
+  void dispose() {
+    _titleInputController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final addProductVariablesProvider =
+        Provider.of<AddProductProvider>(context);
+    final addProductFunctionsProvider =
+        Provider.of<AddProductProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: RichText(
@@ -38,6 +52,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
         child: Column(
           children: [
             TextFormField(
+              controller: _titleInputController,
               decoration: InputDecoration(
                 hintText: 'Title',
                 hintStyle: Theme.of(context).textTheme.labelMedium,
@@ -249,13 +264,9 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         ),
                       ),
                       Checkbox(
-                        value: Provider.of<AddProductProvider>(context)
-                            .forShortlet,
-                        onChanged: (value) {
-                          Provider.of<AddProductProvider>(context,
-                                  listen: false)
-                              .toggleListingOptions("shortlet", value);
-                        },
+                        value: addProductVariablesProvider.forShortlet,
+                        onChanged: (value) => addProductFunctionsProvider
+                            .toggleListingOptions("shortlet", value),
                       ),
                     ],
                   ),
@@ -271,12 +282,9 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         ),
                       ),
                       Checkbox(
-                        value: Provider.of<AddProductProvider>(context).forRent,
-                        onChanged: (value) {
-                          Provider.of<AddProductProvider>(context,
-                                  listen: false)
-                              .toggleListingOptions("rent", value);
-                        },
+                        value: addProductVariablesProvider.forRent,
+                        onChanged: (value) => addProductFunctionsProvider
+                            .toggleListingOptions("rent", value),
                       ),
                     ],
                   ),
@@ -286,7 +294,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
             const SizedBox(
               height: 8,
             ),
-            if (Provider.of<AddProductProvider>(context).forShortlet)
+            if (addProductVariablesProvider.forShortlet)
               SizedBox(
                 child: Column(children: [
                   TextFormField(
@@ -355,7 +363,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                   ),
                 ]),
               ),
-            if (Provider.of<AddProductProvider>(context).forRent)
+            if (addProductVariablesProvider.forRent)
               SizedBox(
                 child: Column(
                   children: [

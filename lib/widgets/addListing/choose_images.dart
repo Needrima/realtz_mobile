@@ -33,16 +33,17 @@ class _ChooseImagesState extends State<ChooseImages> {
 
   @override
   Widget build(BuildContext context) {
+    final addProductVariablesProvider =
+        Provider.of<AddProductProvider>(context);
+    final addProductFunctionsProvider =
+        Provider.of<AddProductProvider>(context, listen: false);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-            onPressed: () {
-              // _pickImages();
-              Provider.of<AddProductProvider>(context, listen: false)
-                  .pickImages();
-            },
+            onPressed: () => addProductFunctionsProvider.pickImages(),
             style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
                 Theme.of(context).colorScheme.inversePrimary,
@@ -62,10 +63,9 @@ class _ChooseImagesState extends State<ChooseImages> {
             ),
           ),
           const Text('maximum of 10 images'),
-          Provider.of<AddProductProvider>(context).imageFileList != null
+          addProductVariablesProvider.imageFileList != null
               ? Wrap(
-                  children: Provider.of<AddProductProvider>(context)
-                      .imageFileList!
+                  children: addProductVariablesProvider.imageFileList!
                       .asMap()
                       .entries
                       .map((image) {
@@ -115,8 +115,8 @@ class _ChooseImagesState extends State<ChooseImages> {
                   }).toList(),
                 )
               : const Text('No images selected'),
-          if (Provider.of<AddProductProvider>(context).imageFileList != null &&
-              Provider.of<AddProductProvider>(context)
+          if (addProductVariablesProvider.imageFileList != null &&
+              addProductVariablesProvider
                   .imageFileList!
                   .isNotEmpty)
             ElevatedButton(
