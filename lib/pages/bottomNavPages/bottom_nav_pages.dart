@@ -19,13 +19,11 @@ class _BottomNavPagesState extends State<BottomNavPages> {
   List<Widget> pages = const [
     Home(),
     Saved(),
-    Explore(),
+    // Explore(),
     AddListing(),
     Inbox(),
     Profile(),
   ];
-
-  String userType = "agent";
 
   @override
   Widget build(BuildContext context) {
@@ -46,19 +44,18 @@ class _BottomNavPagesState extends State<BottomNavPages> {
               label: 'Saved',
               tooltip: 'Saved',
             ),
+            // const BottomNavigationBarItem(
+            //   icon: Icon(Icons.explore),
+            //   activeIcon: Icon(Icons.explore_outlined),
+            //   label: 'Explore',
+            //   tooltip: 'Explore',
+            // ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.explore),
-              activeIcon: Icon(Icons.explore_outlined),
-              label: 'Explore',
-              tooltip: 'Explore',
+              icon: Icon(Icons.add_box_rounded),
+              activeIcon: Icon(Icons.add_box_outlined),
+              label: 'Add Listing',
+              tooltip: 'Add Listing',
             ),
-            if (userType == 'agent')
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.add_box_rounded),
-                activeIcon: Icon(Icons.add_box_outlined),
-                label: 'Add Listing',
-                tooltip: 'Add Listing',
-              ),
             BottomNavigationBarItem(
               icon: Stack(
                 children: [

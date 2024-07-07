@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/home/single_product.dart';
+import 'package:realtz_mobile/widgets/explore/explore_search_delegate.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -105,65 +106,100 @@ class _HomeState extends State<Home> {
                       ),
             Positioned(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        currentTab = 'home';
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: currentTab == 'home'
-                                ? Colors.white
-                                : Colors.transparent,
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                      child: const Text(
-                        'Home',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  Visibility(
+                    visible: false,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    maintainSize: true,
+                    maintainSemantics: true,
+                    maintainInteractivity: true,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: 30,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        currentTab = 'trending';
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: currentTab == 'trending'
-                                ? Colors.white
-                                : Colors.transparent,
-                            width: 2,
+                  SizedBox(
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              currentTab = 'home';
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: currentTab == 'home'
+                                      ? Colors.white
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            child: const Text(
+                              'Home',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      child: const Text(
-                        'Trending',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
+                        const SizedBox(
+                          width: 20,
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              currentTab = 'trending';
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: currentTab == 'trending'
+                                      ? Colors.white
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            child: const Text(
+                              'Trending',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: ExploreSearchDelegate(),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 30,
                     ),
                   ),
                 ],

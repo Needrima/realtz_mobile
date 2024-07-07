@@ -35,9 +35,9 @@ class _InboxState extends State<Inbox> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Inbox',
-          style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+          style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.white,
