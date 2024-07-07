@@ -104,6 +104,9 @@ class _ProductCommentState extends State<ProductComment> {
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),

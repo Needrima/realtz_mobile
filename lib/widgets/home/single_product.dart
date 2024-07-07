@@ -109,6 +109,9 @@ class _SingleProductState extends State<SingleProduct> {
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
