@@ -53,7 +53,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // print(Provider.of<AuthProvider>(context).token);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(

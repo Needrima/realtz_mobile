@@ -103,7 +103,7 @@ class _SingleProductState extends State<SingleProduct> {
                         icon: const Icon(Icons.more_vert),
                         onSelected: (result) {
                           // Handle the menu selection
-                          print('Selected: $result');
+                          
                         },
                         itemBuilder: (BuildContext context) => [
                           const PopupMenuItem(
@@ -190,7 +190,7 @@ class _SingleProductState extends State<SingleProduct> {
                     ),
                     TextButton(
                       onPressed: () {
-                        print('commenting');
+                        
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
@@ -294,7 +294,7 @@ class _SingleProductState extends State<SingleProduct> {
                         icon: const Icon(Icons.more_vert),
                         onSelected: (result) {
                           // Handle the menu selection
-                          print('Selected: $result');
+                          
                         },
                         itemBuilder: (BuildContext context) => [
                           const PopupMenuItem(
@@ -382,7 +382,7 @@ class _SingleProductState extends State<SingleProduct> {
                     ),
                     TextButton(
                       onPressed: () {
-                        print('replying');
+                       
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
@@ -454,7 +454,7 @@ class _SingleProductState extends State<SingleProduct> {
             controller: pageController,
             scrollDirection: Axis.horizontal,
             onPageChanged: (index) {
-              print(index);
+              
             },
             itemCount: images.length,
             itemBuilder: (context, index) {
@@ -587,7 +587,7 @@ class _SingleProductState extends State<SingleProduct> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('view more');
+                    
                   },
                   child: Text(
                     'more',

@@ -47,6 +47,7 @@ class _InboxState extends State<Inbox> {
       body: Padding(
         padding: const EdgeInsets.all(6),
         child: ListView.separated(
+          itemCount: 10,
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(
@@ -130,7 +131,6 @@ class _InboxState extends State<Inbox> {
               height: 10,
             );
           },
-          itemCount: 10,
         ),
       ),
     );

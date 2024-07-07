@@ -68,7 +68,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               onSaved: (value) {
-                print(value);
+                
               },
             ),
             const SizedBox(
@@ -108,7 +108,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               onSaved: (value) {
-                print(value);
+                
               },
             ),
             const SizedBox(
@@ -140,11 +140,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
               validator: (value) {
-                print(value);
+                
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               onSaved: (value) {
-                print(value);
+                
               },
             ),
             const SizedBox(
@@ -176,11 +176,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
               validator: (value) {
-                print(value);
+                
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               onSaved: (value) {
-                print(value);
+                
               },
             ),
             const SizedBox(
@@ -210,11 +210,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
               validator: (value) {
-                print(value);
+                
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               onSaved: (value) {
-                print(value);
+                
               },
             ),
             const SizedBox(
@@ -244,11 +244,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
               validator: (value) {
-                print(value);
+                
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               onSaved: (value) {
-                print(value);
+                
               },
             ),
             const SizedBox(
@@ -333,11 +333,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                       fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                     ),
                     validator: (value) {
-                      print(value);
+                      
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     onSaved: (value) {
-                      print(value);
+                      
                     },
                   ),
                   const SizedBox(
@@ -369,11 +369,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                       fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                     ),
                     validator: (value) {
-                      print(value);
+                      
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     onSaved: (value) {
-                      print(value);
+                      
                     },
                   ),
                   const SizedBox(
@@ -411,11 +411,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                       ),
                       validator: (value) {
-                        print(value);
+                        
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       onSaved: (value) {
-                        print(value);
+                        
                       },
                     ),
                     const SizedBox(
@@ -447,11 +447,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                       ),
                       validator: (value) {
-                        print(value);
+                        
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       onSaved: (value) {
-                        print(value);
+                        
                       },
                     ),
                     const SizedBox(
@@ -483,11 +483,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                       ),
                       validator: (value) {
-                        print(value);
+                        
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       onSaved: (value) {
-                        print(value);
+                        
                       },
                     ),
                     const SizedBox(
@@ -519,11 +519,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                       ),
                       validator: (value) {
-                        print(value);
+                        
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       onSaved: (value) {
-                        print(value);
+                        
                       },
                     ),
                   ],
@@ -563,7 +563,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    print("addding listing");
+                    
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(

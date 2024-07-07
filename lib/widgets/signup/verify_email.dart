@@ -258,7 +258,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
               showFieldAsBox: true,
               onCodeChanged: (String code) {
                 //handle validation or checks here
-                // print(code);
               },
               //runs when every textfield is filled
               onSubmit: (verificationCode) {
