@@ -54,42 +54,53 @@ class AddProductProvider extends ChangeNotifier {
     switch (key) {
       case "title":
         titleInputController.text = value;
+        productDetails[key] = value;
         break;
       case "descriptiom":
         descInputController.text = value;
+        productDetails[key] = value;
         break;
       case "properties":
         propetiesInputController.text = value;
+        productDetails[key] = value.toString().split(',');
         break;
       case "hash_tags":
         hashtagsInputController.text = value;
+        productDetails[key] = value.toString().split(',');
         break;
       case "location":
         locationInputController.text = value;
+        productDetails[key] = value;
         break;
       case "address":
         addrInputController.text = value;
+        productDetails[key] = value;
         break;
       case "short_let_amount":
         shortletFeeInputController.text = value;
+        productDetails[key] = value;
         break;
       case "shortlet_caution_fee":
         shortletCautionFeeInputController.text = value;
+        productDetails[key] = value;
         break;
       case "annual_rent":
         rentInputController.text = value;
+        productDetails[key] = value;
         break;
       case "agreement":
         agreementInputController.text = value;
+        productDetails[key] = value;
         break;
       case "commission":
         commisionInputController.text = value;
+        productDetails[key] = value;
         break;
       case "rent_caution_fee":
         rentCautionFeeInputController.text = value;
+        productDetails[key] = value;
         break;
     }
-    productDetails[key] = value;
     notifyListeners();
   }
 }

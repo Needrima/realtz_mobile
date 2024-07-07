@@ -74,7 +74,8 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 }
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              onSaved: (value) {},
+              onChanged: (value) =>
+                  addProductFunctionsProvider.setProductDetails("title", value),
             ),
             const SizedBox(
               height: 8,
@@ -104,15 +105,16 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
               validator: (value) {
-                if (!RegExp(r'^[a-zA-Z0-9]{20,800}$')
-                    .hasMatch(value.toString())) {
-                  return 'Description must be between 20 and 800 characters';
+                if (value.toString().length < 20 ||
+                    value.toString().length > 500) {
+                  return 'Description must be between 20 and 500 characters';
                 } else {
                   return null;
                 }
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              onSaved: (value) {},
+              onChanged: (value) => addProductFunctionsProvider
+                  .setProductDetails("descriptiom", value),
             ),
             const SizedBox(
               height: 8,
@@ -142,9 +144,9 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 filled: true,
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
-              validator: (value) {},
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              onSaved: (value) {},
+              onChanged: (value) => addProductFunctionsProvider
+                  .setProductDetails("properties", value),
             ),
             const SizedBox(
               height: 8,
@@ -174,9 +176,9 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 filled: true,
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
-              validator: (value) {},
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              onSaved: (value) {},
+              onChanged: (value) => addProductFunctionsProvider
+                  .setProductDetails("hash_tags", value),
             ),
             const SizedBox(
               height: 8,
@@ -204,9 +206,16 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 filled: true,
                 fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
               ),
-              validator: (value) {},
+              validator: (value) {
+                if (value.toString().length < 5) {
+                  return 'Location should be atleast 5 e.g: V.I, Lagos';
+                } else {
+                  return null;
+                }
+              },
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              onSaved: (value) {},
+              onChanged: (value) => addProductFunctionsProvider
+                  .setProductDetails("location", value),
             ),
             const SizedBox(
               height: 8,
