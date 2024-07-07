@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/pages/nonBottomNavPages/agent_profile.dart';
 import 'package:realtz_mobile/widgets/home/comment.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SingleProduct extends StatefulWidget {
   final int productId;
@@ -123,6 +124,16 @@ class _SingleProductState extends State<SingleProduct> {
     );
   }
 
+  void _shareContent(BuildContext context) {
+    final RenderBox box = context.findRenderObject() as RenderBox;
+
+    Share.share(
+      'Check out this awesome apartment',
+      subject: 'Realtz awesome 4 bedroom apartment',
+      sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -227,7 +238,10 @@ class _SingleProductState extends State<SingleProduct> {
                   height: 16,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    print('sharing content');
+                    _shareContent(context);
+                  },
                   child: const Icon(
                     Icons.share_rounded,
                     color: Colors.white,

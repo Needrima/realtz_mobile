@@ -51,5 +51,10 @@
     <string> App wants to access your gallery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>We need access to your photo library to select images.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+	</array>
 </dict>
 </plist>
