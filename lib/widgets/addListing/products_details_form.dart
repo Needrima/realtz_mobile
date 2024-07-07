@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/providers/add_product_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class ProductDetailsForm extends StatefulWidget {
   final void Function(String) changeStep;
@@ -9,9 +12,6 @@ class ProductDetailsForm extends StatefulWidget {
 }
 
 class _ProductDetailsFormState extends State<ProductDetailsForm> {
-  bool forRent = false;
-  bool forShortlet = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -249,11 +249,12 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         ),
                       ),
                       Checkbox(
-                        value: forShortlet,
+                        value: Provider.of<AddProductProvider>(context)
+                            .forShortlet,
                         onChanged: (value) {
-                          setState(() {
-                            forShortlet = value!;
-                          });
+                          Provider.of<AddProductProvider>(context,
+                                  listen: false)
+                              .toggleListingOptions("shortlet", value);
                         },
                       ),
                     ],
@@ -270,11 +271,11 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         ),
                       ),
                       Checkbox(
-                        value: forRent,
+                        value: Provider.of<AddProductProvider>(context).forRent,
                         onChanged: (value) {
-                          setState(() {
-                            forRent = value!;
-                          });
+                          Provider.of<AddProductProvider>(context,
+                                  listen: false)
+                              .toggleListingOptions("rent", value);
                         },
                       ),
                     ],
@@ -285,7 +286,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
             const SizedBox(
               height: 8,
             ),
-            if (forShortlet)
+            if (Provider.of<AddProductProvider>(context).forShortlet)
               SizedBox(
                 child: Column(children: [
                   TextFormField(
@@ -354,7 +355,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                   ),
                 ]),
               ),
-            if (forRent)
+            if (Provider.of<AddProductProvider>(context).forRent)
               SizedBox(
                 child: Column(
                   children: [

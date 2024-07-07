@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddProductProvider extends ChangeNotifier {
+  bool forRent = false;
+  bool forShortlet = false;
   final ImagePicker _picker = ImagePicker();
   List<XFile>? imageFileList = [];
 
@@ -20,6 +22,15 @@ class AddProductProvider extends ChangeNotifier {
 
   void removeImage(int idx) {
     imageFileList!.removeAt(idx);
+    notifyListeners();
+  }
+
+  void toggleListingOptions(String key, bool? value) {
+    if (key == "rent") {
+      forRent = value!;
+    } else {
+      forShortlet = value!;
+    }
     notifyListeners();
   }
 }
