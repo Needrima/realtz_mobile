@@ -41,8 +41,8 @@ class _AgentProfileState extends State<AgentProfile> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: Text(
-          'Agents Profile',
+        title: const Text(
+          '_janedoe1',
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class _AgentProfileState extends State<AgentProfile> {
                 ),
                 const Center(
                   child: Text(
-                    '@janedoe',
+                    '@_janedoe1',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,

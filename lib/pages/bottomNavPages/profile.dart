@@ -55,7 +55,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Profile',
+          'needrima',
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
@@ -126,7 +126,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 Center(
                   child: Text(
-                    'Jane Doe',
+                    'Oyebode Amirdeen',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -139,7 +139,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 const Center(
                   child: Text(
-                    '@janedoe',
+                    '@needrima',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,

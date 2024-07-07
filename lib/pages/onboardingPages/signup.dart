@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
+import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 import 'package:realtz_mobile/widgets/signup/signup_form.dart';
 import 'package:realtz_mobile/widgets/signup/verify_email.dart';
 // import 'package:http/http.dart' as http;
@@ -20,22 +21,6 @@ class _SignupState extends State<Signup> {
   @override
   void initState() {
     super.initState();
-    // checkAuth();
-  }
-
-  void checkAuth() async {
-    final authData = await getAuthData();
-    final bool isLoggedIn = authData['isLoggedIn'] ?? false;
-    if (isLoggedIn) {
-      if (!context.mounted) return;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return const BottomNavPages();
-          },
-        ),
-      );
-    }
   }
 
   void onChangeStep(int step) {
@@ -54,17 +39,19 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: currentStep == 1
-          ? SignupForm(
-              onChangeStep: onChangeStep,
-              setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey,
-            )
-          : VerifyEmail(
-              email: email,
-              otpVerificationKey: otpVerificationKey,
-              setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey,
-            ),
+    return RedirectToHome(
+      child: Scaffold(
+        body: currentStep == 1
+            ? SignupForm(
+                onChangeStep: onChangeStep,
+                setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey,
+              )
+            : VerifyEmail(
+                email: email,
+                otpVerificationKey: otpVerificationKey,
+                setEmailAndOTPVerificationKey: setEmailAndOTPVerificationKey,
+              ),
+      ),
     );
   }
 }
