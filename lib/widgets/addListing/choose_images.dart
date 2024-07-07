@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:realtz_mobile/providers/add_product_provider.dart';
 
 class ChooseImages extends StatefulWidget {
   final void Function(String) changeStep;
@@ -37,7 +39,9 @@ class _ChooseImagesState extends State<ChooseImages> {
         children: [
           ElevatedButton(
             onPressed: () {
-              _pickImages();
+              // _pickImages();
+              Provider.of<AddProductProvider>(context, listen: false)
+                  .pickImages();
             },
             style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
@@ -58,9 +62,13 @@ class _ChooseImagesState extends State<ChooseImages> {
             ),
           ),
           const Text('maximum of 10 images'),
-          _imageFileList != null
+          Provider.of<AddProductProvider>(context).imageFileList != null
               ? Wrap(
-                  children: _imageFileList!.asMap().entries.map((image) {
+                  children: Provider.of<AddProductProvider>(context)
+                      .imageFileList!
+                      .asMap()
+                      .entries
+                      .map((image) {
                     return Container(
                       margin: const EdgeInsets.all(8.0),
                       width: 100,
@@ -88,9 +96,10 @@ class _ChooseImagesState extends State<ChooseImages> {
                             right: -13,
                             child: IconButton(
                               onPressed: () {
-                                setState(() {
-                                  _imageFileList!.removeAt(image.key);
-                                });
+                                Provider.of<AddProductProvider>(
+                                  context,
+                                  listen: false,
+                                ).removeImage(image.key);
                               },
                               icon: Icon(
                                 Icons.delete,
@@ -106,7 +115,10 @@ class _ChooseImagesState extends State<ChooseImages> {
                   }).toList(),
                 )
               : const Text('No images selected'),
-          if (_imageFileList != null && _imageFileList!.isNotEmpty)
+          if (Provider.of<AddProductProvider>(context).imageFileList != null &&
+              Provider.of<AddProductProvider>(context)
+                  .imageFileList!
+                  .isNotEmpty)
             ElevatedButton(
               onPressed: () {
                 widget.changeStep("2");
