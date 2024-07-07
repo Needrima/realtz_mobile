@@ -47,21 +47,6 @@ class _AddListingState extends State<AddListing> {
     }
   }
 
-  // final ImagePicker _picker = ImagePicker();
-  // List<XFile>? _imageFileList = [];
-  // Future<void> _pickImages() async {
-  //   final List<XFile>? selectedImages = await _picker.pickMultiImage();
-  //   if (selectedImages != null) {
-  //     setState(() {
-  //       if (selectedImages.length > 10) {
-  //         _imageFileList = selectedImages.sublist(0, 10);
-  //       } else {
-  //         _imageFileList = selectedImages;
-  //       }
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

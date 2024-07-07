@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
 class AuthProvider extends ChangeNotifier {
-  Map<String, dynamic> user = {};
   bool isLoggedIn = false;
-  String token = '';
 
-  void login(Map<String, dynamic> userData) {
-    user = userData['user'];
-    token = userData['token'];
-    isLoggedIn = true;
+  AuthProvider() {
+    checkIfLoggedIn();
+  }
+
+  void checkIfLoggedIn() async {
+    final authData = await getAuthData();
+    isLoggedIn = authData['isLoggedIn'] ?? false;
     notifyListeners();
   }
 }

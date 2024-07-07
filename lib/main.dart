@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/home.dart';
 import 'package:realtz_mobile/pages/onboardingPages/landing_page.dart';
+import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/providers/auth_provider.dart';
 
 void main() {
@@ -48,6 +50,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const LandingPage(),
+        routes: {
+          "/home" : (context) => const Home(),
+          "/login" : (context) => const Login(),
+        },
         debugShowCheckedModeBanner: false,
       ),
     );

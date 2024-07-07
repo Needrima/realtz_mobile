@@ -92,7 +92,6 @@ class _HomeState extends State<Home> {
                             setState(() {
                               loading = true;
                             });
-                            print('fetching more trending products...');
                           }
                         },
                         itemCount: trendingProducts.length,
