@@ -12,15 +12,6 @@ class ProductDetailsForm extends StatefulWidget {
 }
 
 class _ProductDetailsFormState extends State<ProductDetailsForm> {
-  final TextEditingController _titleInputController =
-      TextEditingController(text: 'Hello world');
-
-  @override
-  void dispose() {
-    _titleInputController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final addProductVariablesProvider =
@@ -52,7 +43,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
         child: Column(
           children: [
             TextFormField(
-              controller: _titleInputController,
+              controller: addProductVariablesProvider.titleInputController,
               decoration: InputDecoration(
                 hintText: 'Title',
                 hintStyle: Theme.of(context).textTheme.labelMedium,
@@ -332,7 +323,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: 'Caution fee',
+                      hintText: 'Shortlet caution fee',
                       hintStyle: Theme.of(context).textTheme.labelMedium,
                       prefixIcon: const Icon(
                         Icons.money_rounded,
@@ -466,7 +457,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        hintText: 'Caution fee',
+                        hintText: 'Rental caution fee',
                         hintStyle: Theme.of(context).textTheme.labelMedium,
                         prefixIcon: const Icon(
                           Icons.money_rounded,
