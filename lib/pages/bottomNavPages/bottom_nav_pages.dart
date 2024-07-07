@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/add_listing.dart';
-import 'package:realtz_mobile/pages/bottomNavPages/explore.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/home.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/inbox.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/profile.dart';
@@ -44,12 +43,6 @@ class _BottomNavPagesState extends State<BottomNavPages> {
               label: 'Saved',
               tooltip: 'Saved',
             ),
-            // const BottomNavigationBarItem(
-            //   icon: Icon(Icons.explore),
-            //   activeIcon: Icon(Icons.explore_outlined),
-            //   label: 'Explore',
-            //   tooltip: 'Explore',
-            // ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.add_box_rounded),
               activeIcon: Icon(Icons.add_box_outlined),
