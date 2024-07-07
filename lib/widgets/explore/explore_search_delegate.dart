@@ -2,8 +2,30 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/widgets/galleryRow/gallery_row.dart';
+import 'dart:async';
 
 class ExploreSearchDelegate extends SearchDelegate {
+  List<Widget> results = [
+    // GalleryRow(),
+  ];
+
+  // Delay duration in milliseconds
+  static const int delayDuration = 3000;
+
+  // Timer variable
+  Timer? _debounceTimer;
+
+  // Simulated API call function
+  fetchSearchResults(String query) {
+    if (query.isEmpty) return;
+    // Replace with actual API call code
+    print('Fetching results for: $query');
+    results = [
+      const GalleryRow(),
+      const GalleryRow(),
+    ];
+  }
+
   @override
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -11,7 +33,7 @@ class ExploreSearchDelegate extends SearchDelegate {
       textTheme: theme.textTheme.copyWith(
         titleLarge: const TextStyle(
           // Customize your search text style here
-          fontSize: 18.0,
+          fontSize: 15.0,
           color: Colors.black,
         ),
       ),
@@ -45,17 +67,29 @@ class ExploreSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // Implement search logic and return the results
-    return Center(
-      child: Text('You searched for: $query'),
-    );
+    return results.isEmpty
+        ? const Center(
+            child: CircularProgressIndicator.adaptive(
+              backgroundColor: Colors.black,
+            ),
+          )
+        : Column(children: results);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<Widget> results = [
-      // GalleryRow(),
-      // GalleryRow(),
-    ];
+    // Debounce function to delay API call
+    void debounce(String queryString) {
+      if (_debounceTimer != null) {
+        _debounceTimer!.cancel();
+      }
+      _debounceTimer = Timer(const Duration(milliseconds: delayDuration), () {
+        // Perform your API call here
+        fetchSearchResults(queryString);
+      });
+    }
+
+    debounce(query);
 
     if (query.isEmpty) {
       return const SingleChildScrollView(
