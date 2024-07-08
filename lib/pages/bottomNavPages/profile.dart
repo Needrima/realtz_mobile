@@ -247,7 +247,7 @@ class _ProfileState extends State<Profile> {
                   overflow: showFullBio
                       ? TextOverflow.visible
                       : TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.start,
                 ),
                 GestureDetector(
                   onTap: () {

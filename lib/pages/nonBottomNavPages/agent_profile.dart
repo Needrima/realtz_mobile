@@ -246,7 +246,7 @@ class _AgentProfileState extends State<AgentProfile> {
                   overflow: showFullBio
                       ? TextOverflow.visible
                       : TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.start,
                 ),
                 GestureDetector(
                   onTap: () {
