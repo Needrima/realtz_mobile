@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:realtz_mobile/constants/constants.dart';
+import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/misc/time_formatter.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
@@ -97,17 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['error']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        showSnackBar(context, '${body['error']}');
       } else {
         otpVerificationKey = body['otp_verification_key'];
         setState(() {
@@ -120,17 +111,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       });
 
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
-          ),
-          showCloseIcon: true,
-          closeIconColor: Colors.white,
-          duration: const Duration(seconds: 5),
-        ),
-      );
+      showSnackBar(context, error.toString());
     }
   }
 
@@ -154,30 +135,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['error']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        showSnackBar(context, '${body['error']}');
       } else {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['message']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        showSnackBar(context, '${body['message']}');
       }
     } catch (error) {
       setState(() {
@@ -185,17 +146,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       });
 
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
-          ),
-          showCloseIcon: true,
-          closeIconColor: Colors.white,
-          duration: const Duration(seconds: 5),
-        ),
-      );
+      showSnackBar(context, error.toString());
     }
   }
 
@@ -219,17 +170,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['error']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        showSnackBar(context, '${body['error']}');
       } else {
         if (!context.mounted) return;
         showDialog(
@@ -269,17 +210,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       });
 
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
-          ),
-          showCloseIcon: true,
-          closeIconColor: Colors.white,
-          duration: const Duration(seconds: 5),
-        ),
-      );
+      showSnackBar(context, error.toString());
     }
   }
 
@@ -404,17 +335,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               };
                               startPasswordRecovery(startPasswordRecoveryData);
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Please enter a valid email address',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  showCloseIcon: true,
-                                  closeIconColor: Colors.white,
-                                  duration: Duration(seconds: 5),
-                                ),
-                              );
+                              showSnackBar(context,
+                                  'Please enter a valid email address');
                             }
                           },
                           style: ButtonStyle(
@@ -632,19 +554,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                         };
                                         resetPassword(resetPasswordData);
                                       } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text(
-                                              'Please enter a valid password',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            showCloseIcon: true,
-                                            closeIconColor: Colors.white,
-                                            duration: Duration(seconds: 5),
-                                          ),
-                                        );
+                                        showSnackBar(context,
+                                            'Please enter a valid password');
                                       }
                                     },
                               style: ButtonStyle(

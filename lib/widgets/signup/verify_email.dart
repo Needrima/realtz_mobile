@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:realtz_mobile/constants/constants.dart';
+import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/misc/time_formatter.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:http/http.dart' as http;
@@ -74,29 +75,15 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['error']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
+        showSnackBar(
+          context,
+          '${body['error']}',
         );
       } else {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['message']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
+        showSnackBar(
+          context,
+          '${body['message']}',
         );
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -112,16 +99,9 @@ class _VerifyEmailState extends State<VerifyEmail> {
       });
 
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
-          ),
-          showCloseIcon: true,
-          closeIconColor: Colors.white,
-          duration: const Duration(seconds: 5),
-        ),
+      showSnackBar(
+        context,
+        error.toString(),
       );
     }
   }
@@ -146,29 +126,15 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['error']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
+        showSnackBar(
+          context,
+          '${body['error']}',
         );
       } else {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['message']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
+        showSnackBar(
+          context,
+          '${body['message']}',
         );
         widget.setEmailAndOTPVerificationKey(
             widget.email, body['otp_verification_key']);
@@ -179,16 +145,9 @@ class _VerifyEmailState extends State<VerifyEmail> {
       });
 
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
-          ),
-          showCloseIcon: true,
-          closeIconColor: Colors.white,
-          duration: const Duration(seconds: 5),
-        ),
+      showSnackBar(
+        context,
+        error.toString(),
       );
     }
   }

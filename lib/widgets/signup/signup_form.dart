@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/constants/constants.dart';
+import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:http/http.dart' as http;
 
@@ -59,17 +60,7 @@ class _SignupFormState extends State<SignupForm> {
 
       if (response.statusCode != 201 && response.statusCode != 200) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['error']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        showSnackBar(context, '${body['error']}');
       } else {
         widget.setEmailAndOTPVerificationKey(
           email!,
@@ -83,17 +74,7 @@ class _SignupFormState extends State<SignupForm> {
       });
 
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
-          ),
-          showCloseIcon: true,
-          closeIconColor: Colors.white,
-          duration: const Duration(seconds: 5),
-        ),
-      );
+      showSnackBar(context, error.toString());
     }
   }
 
@@ -518,41 +499,32 @@ class _SignupFormState extends State<SignupForm> {
                       onPressed: loading
                           ? null
                           : () {
-                              if (formKey.currentState!.validate()) {
-                                if (!agreement) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        'you have not agreed to out terms and conditions',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  formKey.currentState!.save();
-                                  // TODO: make api call to signup user
-                                  final Map<String, dynamic> userSignupData = {
-                                    'user_type': 'user',
-                                    'firstname': firstname,
-                                    'lastname': lastname,
-                                    'username': username,
-                                    'email': email,
-                                    'phone_number': phoneNumber,
-                                    'password': password,
-                                    'confirm_password': confirmPassword,
-                                    'agreement': agreement,
-                                  };
-                                  signup(userSignupData);
-                                }
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'invalid information somewhere',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
+                              if (!formKey.currentState!.validate()) {
+                                showSnackBar(
+                                    context, 'invalid information somewhere');
+                                return;
+                              }
+
+                              if (!agreement) {
+                                showSnackBar(
+                                  context,
+                                  'you have not agreed to out terms and conditions',
                                 );
+                              } else {
+                                formKey.currentState!.save();
+                                // TODO: make api call to signup user
+                                final Map<String, dynamic> userSignupData = {
+                                  'user_type': 'user',
+                                  'firstname': firstname,
+                                  'lastname': lastname,
+                                  'username': username,
+                                  'email': email,
+                                  'phone_number': phoneNumber,
+                                  'password': password,
+                                  'confirm_password': confirmPassword,
+                                  'agreement': agreement,
+                                };
+                                signup(userSignupData);
                               }
                             },
                       style: ButtonStyle(

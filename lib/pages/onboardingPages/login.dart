@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:realtz_mobile/constants/constants.dart';
+import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/pages/onboardingPages/forgot_password.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/pages/onboardingPages/signup.dart';
@@ -55,17 +56,7 @@ class _LoginState extends State<Login> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${body['error']}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            showCloseIcon: true,
-            closeIconColor: Colors.white,
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        showSnackBar(context, '${body['error']}');
       } else {
         await authLogin({
           'user': body['user'],
@@ -87,17 +78,7 @@ class _LoginState extends State<Login> {
       });
 
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            error.toString(),
-            style: const TextStyle(color: Colors.white),
-          ),
-          showCloseIcon: true,
-          closeIconColor: Colors.white,
-          duration: const Duration(seconds: 5),
-        ),
-      );
+      showSnackBar(context, error.toString());
     }
   }
 

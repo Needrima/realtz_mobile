@@ -9,6 +9,7 @@ class AddProductProvider extends ChangeNotifier {
   Map<String, dynamic> productDetails = {};
 
   // controllers
+  final formKey = GlobalKey<FormState>();
   final titleInputController = TextEditingController();
   final descInputController = TextEditingController();
   final propetiesInputController = TextEditingController();
