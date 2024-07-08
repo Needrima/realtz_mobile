@@ -6,7 +6,10 @@ class AddProductProvider extends ChangeNotifier {
   bool forRent = false;
   bool forShortlet = false;
   List<XFile>? imageFileList = [];
-  Map<String, dynamic> productDetails = {};
+  Map<String, dynamic> productDetails = {
+    "for_rent": false,
+    "for_shortlet": false,
+  };
 
   // controllers
   final formKey = GlobalKey<FormState>();
@@ -44,9 +47,9 @@ class AddProductProvider extends ChangeNotifier {
 
   void toggleListingOptions(String key, bool? value) {
     if (key == "rent") {
-      forRent = value!;
+      productDetails["for_rent"] = value!;
     } else {
-      forShortlet = value!;
+      productDetails["for_shortlet"] = value!;
     }
     notifyListeners();
   }
@@ -63,13 +66,21 @@ class AddProductProvider extends ChangeNotifier {
         break;
       case "properties":
         propetiesInputController.text = value;
-        productDetails[key] =
-            value.toString().split(',').map((item) => item.trim());
+        productDetails[key] = value
+            .toString()
+            .split(',')
+            .map((item) => item.trim())
+            .where((item) => item.isNotEmpty)
+            .toList();
         break;
       case "hash_tags":
         hashtagsInputController.text = value;
-        productDetails[key] =
-            value.toString().split(',').map((item) => item.trim());
+        productDetails[key] = value
+            .toString()
+            .split(',')
+            .map((item) => item.trim())
+            .where((item) => item.isNotEmpty)
+            .toList();
         break;
       case "location":
         locationInputController.text = value;

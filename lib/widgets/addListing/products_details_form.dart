@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/providers/add_product_provider.dart';
@@ -126,8 +128,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
               TextFormField(
                 maxLines: null,
                 decoration: InputDecoration(
-                  hintText:
-                      'Properties(comma seperated e.g: 5 bedrooms, \nswimming pool, parking lot, pets allowed)',
+                  hintText: 'Properties',
                   hintStyle: Theme.of(context).textTheme.labelMedium,
                   prefixIcon: const Icon(
                     Icons.interests_rounded,
@@ -152,14 +153,19 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 onChanged: (value) => addProductFunctionsProvider
                     .setProductDetails("properties", value),
               ),
+              Text(
+                'Properties should be comma seperated (e.g: 5 bedrooms, swimming pool, parking lot). Use short but descriptive properties as they help to boost your listing up the search algorithm',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
               const SizedBox(
                 height: 8,
               ),
               TextFormField(
                 maxLines: null,
                 decoration: InputDecoration(
-                  hintText:
-                      'Hash tags(comma seperated e.g: #pets_allowed, \n#attic, #swimming pool)',
+                  hintText: 'Tags',
                   hintStyle: Theme.of(context).textTheme.labelMedium,
                   prefixIcon: const Icon(
                     Icons.tag_rounded,
@@ -183,6 +189,12 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 onChanged: (value) => addProductFunctionsProvider
                     .setProductDetails("hash_tags", value),
+              ),
+              Text(
+                'Tags should be comma seperated (e.g: #pets_allowed, #attic, #swimming_pool). Use short but descriptive tags as they help to boost your listing up the search algorithm',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -275,7 +287,8 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                           ),
                         ),
                         Checkbox(
-                          value: addProductVariablesProvider.forShortlet,
+                          value: addProductVariablesProvider
+                              .productDetails["for_shortlet"] as bool,
                           onChanged: (value) => addProductFunctionsProvider
                               .toggleListingOptions("shortlet", value),
                         ),
@@ -293,7 +306,8 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                           ),
                         ),
                         Checkbox(
-                          value: addProductVariablesProvider.forRent,
+                          value: addProductVariablesProvider
+                              .productDetails["for_rent"] as bool,
                           onChanged: (value) => addProductFunctionsProvider
                               .toggleListingOptions("rent", value),
                         ),
@@ -305,7 +319,8 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
               const SizedBox(
                 height: 8,
               ),
-              if (addProductVariablesProvider.forShortlet)
+              if (addProductVariablesProvider.productDetails["for_shortlet"]
+                  as bool)
                 SizedBox(
                   child: Column(children: [
                     TextFormField(
@@ -388,7 +403,8 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                     ),
                   ]),
                 ),
-              if (addProductVariablesProvider.forRent)
+              if (addProductVariablesProvider.productDetails["for_rent"]
+                  as bool)
                 SizedBox(
                   child: Column(
                     children: [
@@ -588,7 +604,9 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         return;
                       }
                       // add listing api
-                      print('adding listing');
+                      print(
+                        jsonEncode(addProductVariablesProvider.productDetails),
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(
