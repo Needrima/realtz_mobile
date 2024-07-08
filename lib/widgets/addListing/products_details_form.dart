@@ -588,6 +588,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         return;
                       }
                       // add listing api
+                      print('adding listing');
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(

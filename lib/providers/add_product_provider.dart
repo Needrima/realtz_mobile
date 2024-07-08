@@ -63,11 +63,13 @@ class AddProductProvider extends ChangeNotifier {
         break;
       case "properties":
         propetiesInputController.text = value;
-        productDetails[key] = value.toString().split(',');
+        productDetails[key] =
+            value.toString().split(',').map((item) => item.trim());
         break;
       case "hash_tags":
         hashtagsInputController.text = value;
-        productDetails[key] = value.toString().split(',');
+        productDetails[key] =
+            value.toString().split(',').map((item) => item.trim());
         break;
       case "location":
         locationInputController.text = value;
