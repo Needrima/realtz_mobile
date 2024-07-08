@@ -48,6 +48,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
           child: Column(
             children: [
               TextFormField(
+                maxLines: null,
                 controller: addProductVariablesProvider.titleInputController,
                 decoration: InputDecoration(
                   hintText: 'Title',
@@ -200,6 +201,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 height: 8,
               ),
               TextFormField(
+                maxLines: null,
                 decoration: InputDecoration(
                   hintText: 'Location e.g: V.I, Lagos',
                   hintStyle: Theme.of(context).textTheme.labelMedium,
@@ -237,6 +239,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 height: 8,
               ),
               TextFormField(
+                maxLines: null,
                 decoration: InputDecoration(
                   hintText: 'Address e.g 14, John Doe Avenue',
                   hintStyle: Theme.of(context).textTheme.labelMedium,
