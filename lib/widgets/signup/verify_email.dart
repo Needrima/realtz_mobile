@@ -76,14 +76,14 @@ class _VerifyEmailState extends State<VerifyEmail> {
       if (response.statusCode != 200) {
         if (!context.mounted) return;
         showSnackBar(
-          context,
-          '${body['error']}',
+          context: context,
+          message: '${body['error']}',
         );
       } else {
         if (!context.mounted) return;
         showSnackBar(
-          context,
-          '${body['message']}',
+          context: context,
+          message: '${body['message']}',
         );
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -100,8 +100,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
       if (!context.mounted) return;
       showSnackBar(
-        context,
-        error.toString(),
+        context: context,
+        message: error.toString(),
       );
     }
   }
@@ -127,14 +127,14 @@ class _VerifyEmailState extends State<VerifyEmail> {
       if (response.statusCode != 200) {
         if (!context.mounted) return;
         showSnackBar(
-          context,
-          '${body['error']}',
+          context: context,
+          message: '${body['error']}',
         );
       } else {
         if (!context.mounted) return;
         showSnackBar(
-          context,
-          '${body['message']}',
+          context: context,
+          message: '${body['message']}',
         );
         widget.setEmailAndOTPVerificationKey(
             widget.email, body['otp_verification_key']);
@@ -146,8 +146,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
       if (!context.mounted) return;
       showSnackBar(
-        context,
-        error.toString(),
+        context: context,
+        message: error.toString(),
       );
     }
   }

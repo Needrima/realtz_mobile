@@ -60,7 +60,7 @@ class _SignupFormState extends State<SignupForm> {
 
       if (response.statusCode != 201 && response.statusCode != 200) {
         if (!context.mounted) return;
-        showSnackBar(context, '${body['error']}');
+        showSnackBar(context: context, message: '${body['error']}');
       } else {
         widget.setEmailAndOTPVerificationKey(
           email!,
@@ -74,7 +74,7 @@ class _SignupFormState extends State<SignupForm> {
       });
 
       if (!context.mounted) return;
-      showSnackBar(context, error.toString());
+      showSnackBar(context:context, message: error.toString());
     }
   }
 
@@ -501,14 +501,14 @@ class _SignupFormState extends State<SignupForm> {
                           : () {
                               if (!formKey.currentState!.validate()) {
                                 showSnackBar(
-                                    context, 'invalid information somewhere');
+                                    context: context, message: 'invalid information somewhere');
                                 return;
                               }
 
                               if (!agreement) {
                                 showSnackBar(
-                                  context,
-                                  'you have not agreed to out terms and conditions',
+                                  context: context,
+                                  message: 'you have not agreed to out terms and conditions',
                                 );
                               } else {
                                 formKey.currentState!.save();

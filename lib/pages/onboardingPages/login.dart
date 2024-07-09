@@ -56,7 +56,7 @@ class _LoginState extends State<Login> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        showSnackBar(context, '${body['error']}');
+        showSnackBar(context: context, message: '${body['error']}');
       } else {
         await authLogin({
           'user': body['user'],
@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
       });
 
       if (!context.mounted) return;
-      showSnackBar(context, error.toString());
+      showSnackBar(context: context, message: error.toString());
     }
   }
 

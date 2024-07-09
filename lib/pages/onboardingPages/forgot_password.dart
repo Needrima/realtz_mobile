@@ -98,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        showSnackBar(context, '${body['error']}');
+        showSnackBar(context: context, message: '${body['error']}');
       } else {
         otpVerificationKey = body['otp_verification_key'];
         setState(() {
@@ -111,7 +111,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       });
 
       if (!context.mounted) return;
-      showSnackBar(context, error.toString());
+      showSnackBar(context: context, message: error.toString());
     }
   }
 
@@ -135,10 +135,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        showSnackBar(context, '${body['error']}');
+        showSnackBar(context: context, message: '${body['error']}');
       } else {
         if (!context.mounted) return;
-        showSnackBar(context, '${body['message']}');
+        showSnackBar(context: context, message: '${body['message']}');
       }
     } catch (error) {
       setState(() {
@@ -146,7 +146,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       });
 
       if (!context.mounted) return;
-      showSnackBar(context, error.toString());
+      showSnackBar(context: context, message: error.toString());
     }
   }
 
@@ -170,39 +170,40 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
       if (response.statusCode != 200) {
         if (!context.mounted) return;
-        showSnackBar(context, '${body['error']}');
+        showSnackBar(context: context, message: '${body['error']}');
       } else {
         if (!context.mounted) return;
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('Password reset'),
-                content: Text('${body["message"]}'),
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const Login();
-                          },
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Proceed to login',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        fontWeight: FontWeight.bold,
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Password reset'),
+              content: Text('${body["message"]}'),
+              actions: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const Login();
+                        },
                       ),
+                    );
+                  },
+                  child: Text(
+                    'Proceed to login',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              );
-            });
+                ),
+              ],
+            );
+          },
+        );
       }
     } catch (error) {
       setState(() {
@@ -210,7 +211,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       });
 
       if (!context.mounted) return;
-      showSnackBar(context, error.toString());
+      showSnackBar(context: context, message: error.toString());
     }
   }
 
@@ -335,8 +336,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               };
                               startPasswordRecovery(startPasswordRecoveryData);
                             } else {
-                              showSnackBar(context,
-                                  'Please enter a valid email address');
+                              showSnackBar(
+                                context: context,
+                                message: 'Please enter a valid email address',
+                              );
                             }
                           },
                           style: ButtonStyle(
@@ -554,8 +557,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                         };
                                         resetPassword(resetPasswordData);
                                       } else {
-                                        showSnackBar(context,
-                                            'Please enter a valid password');
+                                        showSnackBar(
+                                          context: context,
+                                          message:
+                                              'Please enter a valid password',
+                                        );
                                       }
                                     },
                               style: ButtonStyle(

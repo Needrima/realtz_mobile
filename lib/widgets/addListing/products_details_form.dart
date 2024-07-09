@@ -2,10 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/helpers/snackbar.dart';
+import 'package:realtz_mobile/helpers/popup.dart';
+import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/providers/add_product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:realtz_mobile/providers/auth_provider.dart';
 
 class ProductDetailsForm extends StatefulWidget {
   final void Function(String) changeStep;
@@ -16,13 +20,18 @@ class ProductDetailsForm extends StatefulWidget {
 }
 
 class _ProductDetailsFormState extends State<ProductDetailsForm> {
-  
+  bool addingListing = false;
+
   Future<void> addListing(
     List<XFile>? imageFileList,
     Map<String, dynamic> productDetails,
+    String token,
   ) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://localhost:30002/create-image-product'));
+      'POST',
+      Uri.parse('$productServiceBaseURI/auth/create-image-product'),
+    );
+    request.headers['token'] = token;
 
     // Add JSON body
     request.fields['jsonBody'] = jsonEncode(productDetails);
@@ -42,14 +51,46 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
       request.files.add(multipartFile);
     }
 
-    // Send the request
-    var response = await request.send();
+    setState(() {
+      addingListing = true;
+    });
 
-    // Handle the response
-    if (response.statusCode == 200) {
-      print('Request successful');
-    } else {
-      print('Request failed with status: ${response.statusCode}');
+    try {
+      // Send the request
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      final body = jsonDecode(response.body);
+
+      // Handle the response
+      if (response.statusCode == 200) {
+        if (!context.mounted) return;
+        Provider.of<AddProductProvider>(context, listen: false)
+            .clearPoviderData();
+        widget.changeStep("1");
+        showSnackBar(
+          context: context,
+          message: '${body['message']}',
+          backgroundColor: Colors.white,
+        );
+      } else {
+        if (!context.mounted) return;
+        showSnackBar(context: context, message: '${body['error']}');
+      }
+
+      setState(() {
+        addingListing = false;
+      });
+    } catch (error) {
+      print(error);
+      if (!context.mounted) return;
+      showSnackBar(
+        context: context,
+        message: error.toString(),
+      );
+
+      setState(() {
+        addingListing = false;
+      });
     }
   }
 
@@ -84,6 +125,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
         child: Form(
           key: addProductVariablesProvider.formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
                 maxLines: null,
@@ -111,7 +153,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                   fillColor: const Color.fromRGBO(34, 34, 34, 0.05),
                 ),
                 validator: (value) {
-                  if (!RegExp(r'^[a-zA-Z0-9]{5,}$')
+                  if (!RegExp(r'^[a-zA-Z0-9\s]{5,}$')
                       .hasMatch(value.toString())) {
                     return 'Title must be atleast 5 alphabetnumeric characters';
                   } else {
@@ -159,7 +201,13 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 onChanged: (value) => addProductFunctionsProvider
-                    .setProductDetails("descriptiom", value),
+                    .setProductDetails("description", value),
+              ),
+              Text(
+                'Give a brief description of the property',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -230,7 +278,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                     .setProductDetails("hash_tags", value),
               ),
               Text(
-                'Tags should be comma seperated (e.g: #pets_allowed, #attic, #swimming_pool). Use short but descriptive tags as they help to boost your listing up the search algorithm',
+                'Tags should be comma seperated (e.g: pets_allowed, attic, swimming_pool). Use short but descriptive tags as they help to boost your listing up the search algorithm',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.inversePrimary,
                 ),
@@ -638,16 +686,64 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                     width: 8,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (!addProductVariablesProvider.formKey.currentState!
                           .validate()) {
-                        showSnackBar(context, 'invalid information somewhere');
+                        showSnackBar(
+                            context: context,
+                            message: 'invalid input somewhere');
                         return;
                       }
                       // add listing api
-                      addListing(
-                        addProductVariablesProvider.imageFileList,
-                        addProductVariablesProvider.productDetails,
+                      // await addListing(
+                      //   addProductVariablesProvider.imageFileList,
+                      //   addProductVariablesProvider.productDetails,
+                      //   Provider.of<AuthProvider>(context, listen: false).token,
+                      // );
+                      popUp(
+                        context,
+                        Text(
+                          'Proceed to add listing',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const Text(
+                          'Ensure that all the information you entered are correct before proceeding as we do not allow editing of a listing once added.',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              'Yes, proceed',
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text(
+                              'No, not yet',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                              ),
+                            ),
+                          )
+                        ],
                       );
                     },
                     style: ButtonStyle(

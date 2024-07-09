@@ -10,6 +10,7 @@ class AddProductProvider extends ChangeNotifier {
     "for_rent": false,
     "for_shortlet": false,
   };
+  final ImagePicker _picker = ImagePicker();
 
   // controllers
   final formKey = GlobalKey<FormState>();
@@ -26,7 +27,6 @@ class AddProductProvider extends ChangeNotifier {
   final commisionInputController = TextEditingController();
   final rentCautionFeeInputController = TextEditingController();
 
-  final ImagePicker _picker = ImagePicker();
   Future<void> pickImages() async {
     final List<XFile>? selectedImages = await _picker.pickMultiImage();
     if (selectedImages != null) {
@@ -60,7 +60,7 @@ class AddProductProvider extends ChangeNotifier {
         titleInputController.text = value;
         productDetails[key] = value;
         break;
-      case "descriptiom":
+      case "description":
         descInputController.text = value;
         productDetails[key] = value;
         break;
@@ -92,29 +92,55 @@ class AddProductProvider extends ChangeNotifier {
         break;
       case "short_let_amount":
         shortletFeeInputController.text = value;
-        productDetails[key] = value;
+        productDetails[key] = double.parse(value);
         break;
       case "shortlet_caution_fee":
         shortletCautionFeeInputController.text = value;
-        productDetails[key] = value;
+        productDetails[key] = double.parse(value);
         break;
       case "annual_rent":
         rentInputController.text = value;
-        productDetails[key] = value;
+        productDetails[key] = double.parse(value);
         break;
       case "agreement":
         agreementInputController.text = value;
-        productDetails[key] = value;
+        productDetails[key] = double.parse(value);
         break;
       case "commission":
         commisionInputController.text = value;
-        productDetails[key] = value;
+        productDetails[key] = double.parse(value);
         break;
       case "rent_caution_fee":
         rentCautionFeeInputController.text = value;
-        productDetails[key] = value;
+        productDetails[key] = double.parse(value);
         break;
     }
+    notifyListeners();
+  }
+
+  void clearPoviderData() {
+    forRent = false;
+    forShortlet = false;
+    imageFileList = [];
+    productDetails = {
+      "for_rent": false,
+      "for_shortlet": false,
+    };
+
+    // controllers
+    titleInputController.text = "";
+    descInputController.text = "";
+    propetiesInputController.text = "";
+    hashtagsInputController.text = "";
+    locationInputController.text = "";
+    addrInputController.text = "";
+    shortletFeeInputController.text = "";
+    shortletCautionFeeInputController.text = "";
+    rentInputController.text = "";
+    agreementInputController.text = "";
+    commisionInputController.text = "";
+    rentCautionFeeInputController.text = "";
+
     notifyListeners();
   }
 }

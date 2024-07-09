@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// authData contains user info, jwt token and an isLoggedI variable
+// authData contains user info, jwt token and an isLoggedIn variable
 Future<void> authLogin(Map<String, dynamic> authData) async {
   final authPref = await SharedPreferences.getInstance();
   final authDataJson = jsonEncode(authData);
