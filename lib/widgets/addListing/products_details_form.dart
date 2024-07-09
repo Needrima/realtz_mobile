@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/providers/add_product_provider.dart';
-
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class ProductDetailsForm extends StatefulWidget {
   final void Function(String) changeStep;
@@ -15,6 +16,43 @@ class ProductDetailsForm extends StatefulWidget {
 }
 
 class _ProductDetailsFormState extends State<ProductDetailsForm> {
+  
+  Future<void> addListing(
+    List<XFile>? imageFileList,
+    Map<String, dynamic> productDetails,
+  ) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://localhost:30002/create-image-product'));
+
+    // Add JSON body
+    request.fields['jsonBody'] = jsonEncode(productDetails);
+
+    // Add images
+    for (int i = 0; i < imageFileList!.length; i++) {
+      var stream = http.ByteStream(imageFileList[i].openRead());
+      var length = await imageFileList[i].length();
+
+      var multipartFile = http.MultipartFile(
+        'images', // this is the field name for the images array in your backend
+        stream,
+        length,
+        filename: imageFileList[i].path.split('/').last,
+      );
+
+      request.files.add(multipartFile);
+    }
+
+    // Send the request
+    var response = await request.send();
+
+    // Handle the response
+    if (response.statusCode == 200) {
+      print('Request successful');
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final addProductVariablesProvider =
@@ -607,8 +645,9 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         return;
                       }
                       // add listing api
-                      print(
-                        jsonEncode(addProductVariablesProvider.productDetails),
+                      addListing(
+                        addProductVariablesProvider.imageFileList,
+                        addProductVariablesProvider.productDetails,
                       );
                     },
                     style: ButtonStyle(
