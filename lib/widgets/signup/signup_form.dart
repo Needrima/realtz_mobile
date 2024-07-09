@@ -5,6 +5,7 @@ import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:http/http.dart' as http;
+import 'package:realtz_mobile/widgets/loader/loader.dart';
 
 class SignupForm extends StatefulWidget {
   final void Function(int) onChangeStep;
@@ -74,7 +75,7 @@ class _SignupFormState extends State<SignupForm> {
       });
 
       if (!context.mounted) return;
-      showSnackBar(context:context, message: error.toString());
+      showSnackBar(context: context, message: error.toString());
     }
   }
 
@@ -501,14 +502,16 @@ class _SignupFormState extends State<SignupForm> {
                           : () {
                               if (!formKey.currentState!.validate()) {
                                 showSnackBar(
-                                    context: context, message: 'invalid information somewhere');
+                                    context: context,
+                                    message: 'invalid information somewhere');
                                 return;
                               }
 
                               if (!agreement) {
                                 showSnackBar(
                                   context: context,
-                                  message: 'you have not agreed to out terms and conditions',
+                                  message:
+                                      'you have not agreed to out terms and conditions',
                                 );
                               } else {
                                 formKey.currentState!.save();
@@ -545,7 +548,7 @@ class _SignupFormState extends State<SignupForm> {
                           vertical: 10,
                         ),
                         child: loading
-                            ? const CircularProgressIndicator.adaptive(
+                            ? const Loader(
                                 backgroundColor: Colors.white,
                               )
                             : const Text(

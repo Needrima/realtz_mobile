@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:realtz_mobile/widgets/galleryRow/gallery_row.dart';
 import 'dart:async';
 
+import 'package:realtz_mobile/widgets/loader/loader.dart';
+
 class HomeSearch extends SearchDelegate {
   List<Widget> results = [
     // GalleryRow(),
@@ -69,7 +71,7 @@ class HomeSearch extends SearchDelegate {
     // Implement search logic and return the results
     return results.isEmpty
         ? const Center(
-            child: CircularProgressIndicator.adaptive(
+            child: Loader(
               backgroundColor: Colors.black,
             ),
           )
@@ -106,7 +108,7 @@ class HomeSearch extends SearchDelegate {
 
     return results.isEmpty
         ? const Center(
-            child: CircularProgressIndicator.adaptive(
+            child: Loader(
               backgroundColor: Colors.black,
             ),
           )

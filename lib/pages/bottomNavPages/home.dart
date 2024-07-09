@@ -3,6 +3,7 @@ import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/home/single_product.dart';
 import 'package:realtz_mobile/widgets/home/search.dart';
+import 'package:realtz_mobile/widgets/loader/loader.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -78,7 +79,7 @@ class _HomeState extends State<Home> {
                         },
                       )
                     : const Center(
-                        child: CircularProgressIndicator.adaptive(
+                        child: Loader(
                           backgroundColor: Colors.white,
                         ),
                       )
@@ -100,7 +101,7 @@ class _HomeState extends State<Home> {
                         },
                       )
                     : const Center(
-                        child: CircularProgressIndicator.adaptive(
+                        child: Loader(
                           backgroundColor: Colors.white,
                         ),
                       ),
@@ -210,7 +211,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CircularProgressIndicator.adaptive(
+                    Loader(
                       backgroundColor: Colors.white,
                     ),
                   ],

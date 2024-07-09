@@ -11,6 +11,7 @@ void popUp(
     barrierDismissible: false,
     builder: (context) {
       return AlertDialog(
+        surfaceTintColor: Colors.white,
         title: title,
         content: content,
         actions: actions,

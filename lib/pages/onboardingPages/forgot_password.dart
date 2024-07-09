@@ -11,6 +11,7 @@ import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/pages/onboardingPages/signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
+import 'package:realtz_mobile/widgets/loader/loader.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -360,7 +361,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               vertical: 10,
                             ),
                             child: verifyingEmail
-                                ? const CircularProgressIndicator.adaptive(
+                                ? const Loader(
                                     backgroundColor: Colors.white,
                                   )
                                 : const Text(
@@ -583,7 +584,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   vertical: 10,
                                 ),
                                 child: restingPassword
-                                    ? const CircularProgressIndicator.adaptive(
+                                    ? const Loader(
                                         backgroundColor: Colors.white,
                                       )
                                     : const Text(

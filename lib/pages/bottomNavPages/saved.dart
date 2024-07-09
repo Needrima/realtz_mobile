@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/galleryRow/gallery_row.dart';
+import 'package:realtz_mobile/widgets/loader/loader.dart';
 
 class Saved extends StatefulWidget {
   const Saved({super.key});
@@ -61,7 +62,7 @@ class _SavedState extends State<Saved> {
               ),
             if (loading)
               const Center(
-                child: CircularProgressIndicator.adaptive(
+                child: Loader(
                   backgroundColor: Colors.white,
                 ),
               ),

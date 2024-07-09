@@ -9,6 +9,7 @@ import 'package:realtz_mobile/pages/onboardingPages/signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:realtz_mobile/providers/auth_provider.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
+import 'package:realtz_mobile/widgets/loader/loader.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -260,7 +261,7 @@ class _LoginState extends State<Login> {
                         vertical: 10,
                       ),
                       child: loading
-                          ? const CircularProgressIndicator.adaptive(
+                          ? const Loader(
                               backgroundColor: Colors.white,
                             )
                           : const Text(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/providers/add_product_provider.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
@@ -20,31 +21,24 @@ class _AddListingState extends State<AddListing> {
   String step = '1';
   bool forRent = false;
   bool forShortlet = false;
+
   void changeStep(String s) {
     setState(() {
       step = s;
     });
   }
 
+  void addingProductSuccess(String message) {
+    if (!context.mounted) return;
+    showSnackBar(
+      context: context,
+      message: message,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    checkAuth();
-  }
-
-  void checkAuth() async {
-    final authData = await getAuthData();
-    final bool isLoggedIn = authData['isLoggedIn'] ?? false;
-    if (!isLoggedIn) {
-      if (!context.mounted) return;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return const Login();
-          },
-        ),
-      );
-    }
   }
 
   @override
@@ -58,7 +52,7 @@ class _AddListingState extends State<AddListing> {
       child: Scaffold(
         body: step == '1'
             ? ChooseImages(changeStep: changeStep)
-            : ProductDetailsForm(changeStep: changeStep),
+            : ProductDetailsForm(changeStep: changeStep, addingProductSuccess: addingProductSuccess),
       ),
     );
   }

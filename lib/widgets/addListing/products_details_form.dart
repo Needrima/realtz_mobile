@@ -10,10 +10,13 @@ import 'package:realtz_mobile/providers/add_product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:realtz_mobile/providers/auth_provider.dart';
+import 'package:realtz_mobile/widgets/loader/loader.dart';
 
 class ProductDetailsForm extends StatefulWidget {
   final void Function(String) changeStep;
-  const ProductDetailsForm({super.key, required this.changeStep});
+  final void Function(String)? addingProductSuccess;
+  const ProductDetailsForm(
+      {super.key, required this.changeStep, this.addingProductSuccess});
 
   @override
   State<ProductDetailsForm> createState() => _ProductDetailsFormState();
@@ -63,25 +66,25 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
 
       // Handle the response
       if (response.statusCode == 200) {
+        print("success");
         if (!context.mounted) return;
         Provider.of<AddProductProvider>(context, listen: false)
             .clearPoviderData();
+        Navigator.of(context).pop();
         widget.changeStep("1");
-        showSnackBar(
-          context: context,
-          message: '${body['message']}',
-          backgroundColor: Colors.white,
-        );
+        widget.addingProductSuccess!('${body['message']}');
       } else {
+        print("non success");
         if (!context.mounted) return;
         showSnackBar(context: context, message: '${body['error']}');
+        Navigator.of(context).pop();
       }
 
       setState(() {
         addingListing = false;
       });
     } catch (error) {
-      print(error);
+      print('error: $error');
       if (!context.mounted) return;
       showSnackBar(
         context: context,
@@ -718,28 +721,46 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                         ),
                         [
                           GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              'Yes, proceed',
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inversePrimary,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 14,
-                              ),
-                            ),
+                            onTap: addingListing
+                                ? null
+                                : () async {
+                                    await addListing(
+                                      addProductVariablesProvider.imageFileList,
+                                      addProductVariablesProvider
+                                          .productDetails,
+                                      Provider.of<AuthProvider>(
+                                        context,
+                                        listen: false,
+                                      ).token,
+                                    );
+                                  },
+                            child: addingListing
+                                ? const Loader(
+                                    backgroundColor: Colors.black,
+                                  )
+                                : Text(
+                                    'Yes, proceed',
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .inversePrimary,
+                                      fontWeight: FontWeight.w700,
+                                      // fontSize: 14,
+                                    ),
+                                  ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
+                            onTap: addingListing
+                                ? null
+                                : () {
+                                    Navigator.of(context).pop();
+                                  },
                             child: const Text(
                               'No, not yet',
                               style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 14,
+                                // fontSize: 14,
                               ),
                             ),
                           )
