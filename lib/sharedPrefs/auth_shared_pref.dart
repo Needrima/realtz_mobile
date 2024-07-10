@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,4 +25,19 @@ Future<Map<String, dynamic>> getAuthData() async {
 Future<void> authLogout() async {
   final authPref = await SharedPreferences.getInstance();
   authPref.remove(authInfoKey);
+}
+
+Future <bool> checkIfLoggedIn() async {
+  final authData = await getAuthData();
+  return authData['isLoggedIn'] ?? false;
+}
+
+Future<Map<String, dynamic>> getUser() async {
+  final authData = await getAuthData();
+  return authData['user'] ?? {};
+}
+
+Future<String> getToken() async {
+  final authData = await getAuthData();
+  return authData['token'] ?? '';
 }

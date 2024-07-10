@@ -37,6 +37,23 @@ class _SavedState extends State<Saved> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: RichText(
+          text: TextSpan(
+            text: 'Saved ',
+            style: Theme.of(context).textTheme.titleLarge,
+            children: <TextSpan>[
+              TextSpan(
+                text: 'Items',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
+            ],
+          ),
+        ),
+        surfaceTintColor: Colors.white,
+      ),
       body: SafeArea(
         child: Stack(
           children: [

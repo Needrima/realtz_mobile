@@ -25,115 +25,113 @@ class _BottomNavPagesState extends State<BottomNavPages> {
 
   @override
   Widget build(BuildContext context) {
-    return RedirectToLogin(
-      child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded),
-              activeIcon: Icon(Icons.home_outlined),
-              label: 'Home',
-              tooltip: 'Home',
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.save),
-              activeIcon: Icon(Icons.save_outlined),
-              label: 'Saved',
-              tooltip: 'Saved',
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_rounded),
-              activeIcon: Icon(Icons.add_box_outlined),
-              label: 'Add Listing',
-              tooltip: 'Add Listing',
-            ),
-            BottomNavigationBarItem(
-              icon: Stack(
-                children: [
-                  const Icon(Icons.inbox_rounded),
-                  Positioned(
-                    top: -4,
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Text(
-                        '1',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: [
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home_rounded),
+            activeIcon: Icon(Icons.home_outlined),
+            label: 'Home',
+            tooltip: 'Home',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.save),
+            activeIcon: Icon(Icons.save_outlined),
+            label: 'Saved',
+            tooltip: 'Saved',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.add_box_rounded),
+            activeIcon: Icon(Icons.add_box_outlined),
+            label: 'Add Listing',
+            tooltip: 'Add Listing',
+          ),
+          BottomNavigationBarItem(
+            icon: Stack(
+              children: [
+                const Icon(Icons.inbox_rounded),
+                Positioned(
+                  top: -4,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text(
+                      '1',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
-                  )
-                ],
-              ),
-              activeIcon: Stack(
-                children: [
-                  const Icon(Icons.inbox_outlined),
-                  Positioned(
-                    top: -4,
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Text(
-                        '1',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  ),
+                )
+              ],
+            ),
+            activeIcon: Stack(
+              children: [
+                const Icon(Icons.inbox_outlined),
+                Positioned(
+                  top: -4,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text(
+                      '1',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
-                  )
-                ],
-              ),
-              label: 'Inbox',
-              tooltip: 'Inbox',
+                  ),
+                )
+              ],
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
-              activeIcon: Icon(Icons.person_outlined),
-              label: 'Profile',
-              tooltip: 'Profile',
-            ),
-          ],
-          unselectedItemColor: _currentIndex == 0 ? Colors.white : Colors.black,
-          unselectedLabelStyle: TextStyle(
-            color: _currentIndex == 0
-                ? Colors.white
-                : Theme.of(context).colorScheme.inversePrimary,
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
+            label: 'Inbox',
+            tooltip: 'Inbox',
           ),
-          selectedItemColor: Theme.of(context).colorScheme.inversePrimary,
-          selectedLabelStyle: TextStyle(
-            color: Theme.of(context).colorScheme.inversePrimary,
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.person_rounded),
+            activeIcon: Icon(Icons.person_outlined),
+            label: 'Profile',
+            tooltip: 'Profile',
           ),
-          iconSize: 32,
-          showUnselectedLabels: true,
-          // type property must be BottomNavigationBarType.fixed to enable changing background color
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: _currentIndex == 0 ? Colors.black : Colors.white,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+        ],
+        unselectedItemColor: _currentIndex == 0 ? Colors.white : Colors.black,
+        unselectedLabelStyle: TextStyle(
+          color: _currentIndex == 0
+              ? Colors.white
+              : Theme.of(context).colorScheme.inversePrimary,
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
         ),
-        body: IndexedStack(
-          index: _currentIndex,
-          children: pages,
+        selectedItemColor: Theme.of(context).colorScheme.inversePrimary,
+        selectedLabelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
         ),
+        iconSize: 32,
+        showUnselectedLabels: true,
+        // type property must be BottomNavigationBarType.fixed to enable changing background color
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: _currentIndex == 0 ? Colors.black : Colors.white,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: pages,
       ),
     );
   }

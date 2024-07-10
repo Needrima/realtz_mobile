@@ -10,6 +10,7 @@ import 'package:realtz_mobile/providers/add_product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:realtz_mobile/providers/auth_provider.dart';
+import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/loader/loader.dart';
 
 class ProductDetailsForm extends StatefulWidget {
@@ -112,7 +113,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
             style: Theme.of(context).textTheme.titleLarge,
             children: <TextSpan>[
               TextSpan(
-                text: 'details',
+                text: 'Details',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.inversePrimary,
                 ),
@@ -158,7 +159,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                 validator: (value) {
                   if (!RegExp(r'^[a-zA-Z0-9\s]{5,}$')
                       .hasMatch(value.toString())) {
-                    return 'Title must be atleast 5 alphabetnumeric characters';
+                    return 'Title must be atleast 5 characters (e.g: Fully furnished \n4 bedrooms duplex)';
                   } else {
                     return null;
                   }
@@ -724,14 +725,13 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                             onTap: addingListing
                                 ? null
                                 : () async {
+                                    String token = await getToken();
+                                    print(token);
                                     await addListing(
                                       addProductVariablesProvider.imageFileList,
                                       addProductVariablesProvider
                                           .productDetails,
-                                      Provider.of<AuthProvider>(
-                                        context,
-                                        listen: false,
-                                      ).token,
+                                      token,
                                     );
                                   },
                             child: addingListing

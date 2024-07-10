@@ -9,6 +9,7 @@ import 'package:realtz_mobile/providers/add_product_provider.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/addListing/choose_images.dart';
 import 'package:realtz_mobile/widgets/addListing/products_details_form.dart';
+import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 
 class AddListing extends StatefulWidget {
   const AddListing({super.key});
@@ -43,16 +44,20 @@ class _AddListingState extends State<AddListing> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AddProductProvider>(
-          create: (context) => AddProductProvider(),
+    return RedirectToLogin(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AddProductProvider>(
+            create: (context) => AddProductProvider(),
+          ),
+        ],
+        child: Scaffold(
+          body: step == '1'
+              ? ChooseImages(changeStep: changeStep)
+              : ProductDetailsForm(
+                  changeStep: changeStep,
+                  addingProductSuccess: addingProductSuccess),
         ),
-      ],
-      child: Scaffold(
-        body: step == '1'
-            ? ChooseImages(changeStep: changeStep)
-            : ProductDetailsForm(changeStep: changeStep, addingProductSuccess: addingProductSuccess),
       ),
     );
   }

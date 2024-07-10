@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:realtz_mobile/pages/nonBottomNavPages/settings.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
+import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 import 'package:realtz_mobile/widgets/galleryRow/gallery_row.dart';
 
 class Profile extends StatefulWidget {
@@ -52,234 +53,238 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'needrima',
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          IconButton(
-            padding: const EdgeInsets.all(3),
-            style: const ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(
-                Color.fromRGBO(244, 244, 244, 1),
-              ),
+    return RedirectToLogin(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'needrima',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
             ),
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Settings()));
-            },
           ),
-        ],
-        surfaceTintColor: Colors.white,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 10,
+          actions: [
+            IconButton(
+              padding: const EdgeInsets.all(3),
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(
+                  Color.fromRGBO(244, 244, 244, 1),
                 ),
-                Center(
-                  child: GestureDetector(
-                    onTap: _pickImage,
-                    child: Stack(
-                      children: [
-                        CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage: _image != null
-                              ? FileImage(_image!)
-                              : const AssetImage(
-                                      'assets/images/default-avatar.jpg')
-                                  as ImageProvider, // Update with your image path
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: const BoxDecoration(
-                              color: Colors.blue,
-                              shape: BoxShape.circle,
+              ),
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Settings()));
+              },
+            ),
+          ],
+          surfaceTintColor: Colors.white,
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: GestureDetector(
+                      onTap: _pickImage,
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            radius: 50.0,
+                            backgroundImage: _image != null
+                                ? FileImage(_image!)
+                                : const AssetImage(
+                                        'assets/images/default-avatar.jpg')
+                                    as ImageProvider, // Update with your image path
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: const BoxDecoration(
+                                color: Colors.blue,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 20,
-                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Center(
-                  child: Text(
-                    'Oyebode Amirdeen',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Center(
-                  child: Text(
-                    '@needrima',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color.fromRGBO(34, 34, 34, 0.6),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(8),
-                          ),
-                        ),
-                        width: double.infinity,
-                        height: 88,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '5',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inversePrimary,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              const Text(
-                                'Liked listings',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(34, 34, 34, 1),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(8),
-                          ),
-                        ),
-                        width: double.infinity,
-                        height: 88,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '30',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inversePrimary,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              const Text(
-                                'Saved listings',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(34, 34, 34, 1),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'Bala blu garri pdapc garri bala corn bulaba corn bulaba our highway umbreleda blu 50million umbreleda eneme eba youths roasted mpower bala electricty eneme down-payment broooom from broooom generated garri pdapc roasted different eba electricty bala 50million symbol roasted blu tia-tia recruit different from umbreleda highway our blu roasted roasted different highway electricty generated bala bala eba super generated tia-tia from from eneme pdapc bulaba townhall symbol garri electricty bulaba blu electricty our army symbol umbreleda youths townhall highway pdapc super townhall bala generated our army super from highway line roasted eba line blu bulaba line eba umbreleda different bala',
-                  maxLines: showFullBio ? null : 3,
-                  overflow: showFullBio
-                      ? TextOverflow.visible
-                      : TextOverflow.ellipsis,
-                  textAlign: TextAlign.start,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      showFullBio = !showFullBio;
-                    });
-                  },
-                  child: Text(
-                    'show ${showFullBio ? 'less' : 'more'}',
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        fontWeight: FontWeight.w600),
                   ),
-                ),
-                const SizedBox(height: 30),
-                const Row(
-                  children: [
-                    Text(
-                      'Recently liked listings',
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Center(
+                    child: Text(
+                      'Oyebode Amirdeen',
                       style: TextStyle(
-                        fontWeight: FontWeight.w700,
                         fontSize: 16,
-                        color: Color.fromRGBO(34, 34, 34, 1),
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).colorScheme.inversePrimary,
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const GalleryRow(),
-                const GalleryRow(),
-                const GalleryRow(),
-              ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Center(
+                    child: Text(
+                      '@needrima',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color.fromRGBO(34, 34, 34, 0.6),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                          ),
+                          width: double.infinity,
+                          height: 88,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '5',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                const Text(
+                                  'Liked listings',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                          ),
+                          width: double.infinity,
+                          height: 88,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '30',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .inversePrimary,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                const Text(
+                                  'Saved listings',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Bala blu garri pdapc garri bala corn bulaba corn bulaba our highway umbreleda blu 50million umbreleda eneme eba youths roasted mpower bala electricty eneme down-payment broooom from broooom generated garri pdapc roasted different eba electricty bala 50million symbol roasted blu tia-tia recruit different from umbreleda highway our blu roasted roasted different highway electricty generated bala bala eba super generated tia-tia from from eneme pdapc bulaba townhall symbol garri electricty bulaba blu electricty our army symbol umbreleda youths townhall highway pdapc super townhall bala generated our army super from highway line roasted eba line blu bulaba line eba umbreleda different bala',
+                    maxLines: showFullBio ? null : 3,
+                    overflow: showFullBio
+                        ? TextOverflow.visible
+                        : TextOverflow.ellipsis,
+                    textAlign: TextAlign.start,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        showFullBio = !showFullBio;
+                      });
+                    },
+                    child: Text(
+                      'show ${showFullBio ? 'less' : 'more'}',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const Row(
+                    children: [
+                      Text(
+                        'Recently liked listings',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          color: Color.fromRGBO(34, 34, 34, 1),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  const GalleryRow(),
+                  const GalleryRow(),
+                  const GalleryRow(),
+                ],
+              ),
             ),
           ),
         ),
