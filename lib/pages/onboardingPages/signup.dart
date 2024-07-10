@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
-import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 import 'package:realtz_mobile/widgets/signup/signup_form.dart';
 import 'package:realtz_mobile/widgets/signup/verify_email.dart';

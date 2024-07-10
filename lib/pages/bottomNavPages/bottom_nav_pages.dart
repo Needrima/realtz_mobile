@@ -4,7 +4,6 @@ import 'package:realtz_mobile/pages/bottomNavPages/home.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/inbox.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/profile.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/saved.dart';
-import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 
 class BottomNavPages extends StatefulWidget {
   const BottomNavPages({super.key});

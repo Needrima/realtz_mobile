@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/pages/onboardingPages/forgot_password.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/pages/onboardingPages/signup.dart';
 import 'package:http/http.dart' as http;
-import 'package:realtz_mobile/providers/auth_provider.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 import 'package:realtz_mobile/widgets/loader/loader.dart';

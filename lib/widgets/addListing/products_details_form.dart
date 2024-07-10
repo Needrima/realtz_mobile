@@ -5,11 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:realtz_mobile/constants/constants.dart';
 import 'package:realtz_mobile/helpers/snackbar.dart';
 import 'package:realtz_mobile/helpers/popup.dart';
-import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/providers/add_product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:realtz_mobile/providers/auth_provider.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/loader/loader.dart';
 

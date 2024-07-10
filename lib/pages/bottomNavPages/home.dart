@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:realtz_mobile/pages/onboardingPages/login.dart';
-import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 import 'package:realtz_mobile/widgets/home/single_product.dart';
 import 'package:realtz_mobile/widgets/home/search.dart';

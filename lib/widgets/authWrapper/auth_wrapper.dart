@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:realtz_mobile/pages/bottomNavPages/bottom_nav_pages.dart';
 import 'package:realtz_mobile/pages/onboardingPages/login.dart';
-import 'package:realtz_mobile/providers/auth_provider.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 
 class RedirectToHome extends StatefulWidget {
