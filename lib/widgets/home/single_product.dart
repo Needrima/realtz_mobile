@@ -242,7 +242,6 @@ class _SingleProductState extends State<SingleProduct> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print('sharing content');
                     _shareContent(context);
                   },
                   child: const Icon(

@@ -65,7 +65,6 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
 
       // Handle the response
       if (response.statusCode == 200) {
-        print("success");
         if (!context.mounted) return;
         Provider.of<AddProductProvider>(context, listen: false)
             .clearPoviderData();
@@ -73,7 +72,6 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
         widget.changeStep("1");
         widget.addingProductSuccess!('${body['message']}');
       } else {
-        print("non success");
         if (!context.mounted) return;
         showSnackBar(context: context, message: '${body['error']}');
         Navigator.of(context).pop();
@@ -83,7 +81,6 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
         addingListing = false;
       });
     } catch (error) {
-      print('error: $error');
       if (!context.mounted) return;
       showSnackBar(
         context: context,
@@ -724,7 +721,6 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                                 ? null
                                 : () async {
                                     String token = await getToken();
-                                    print(token);
                                     await addListing(
                                       addProductVariablesProvider.imageFileList,
                                       addProductVariablesProvider

@@ -21,7 +21,6 @@ class HomeSearch extends SearchDelegate {
   fetchSearchResults(String query) {
     if (query.isEmpty) return;
     // Replace with actual API call code
-    print('Fetching results for: $query');
     results = [
       const GalleryRow(),
       const GalleryRow(),
