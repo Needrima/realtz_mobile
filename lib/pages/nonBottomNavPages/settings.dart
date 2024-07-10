@@ -18,7 +18,7 @@ class _SettingsState extends State<Settings> {
     {
       'label': 'Account',
       'iconData': Icons.person,
-      'type' : 'route',
+      'type': 'route',
       'route': const Account(),
     },
     {
@@ -50,7 +50,7 @@ class _SettingsState extends State<Settings> {
                   popUp(
                     context,
                     const Text('Logout ?'),
-                    const Text('Proceed to logout?'),
+                    const Text('Are you sure you want to logout ?'),
                     [
                       GestureDetector(
                         onTap: () {
@@ -68,6 +68,9 @@ class _SettingsState extends State<Settings> {
                           style: TextStyle(color: Colors.red),
                         ),
                       ),
+                      const SizedBox(
+                        width: 8,
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).pop();
@@ -80,6 +83,7 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                     ],
+                    true,
                   );
                 },
                 icon: const Icon(Icons.logout))

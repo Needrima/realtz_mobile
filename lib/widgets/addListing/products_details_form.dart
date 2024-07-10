@@ -759,6 +759,7 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
                             ),
                           )
                         ],
+                        true,
                       );
                     },
                     style: ButtonStyle(

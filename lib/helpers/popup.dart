@@ -5,12 +5,18 @@ void popUp(
   Widget title,
   Widget content,
   List<Widget> actions,
+  bool barrierDismissible,
 ) {
   showDialog(
     context: context,
-    barrierDismissible: false,
+    barrierDismissible: barrierDismissible,
     builder: (context) {
       return AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
         surfaceTintColor: Colors.white,
         title: title,
         content: content,
