@@ -128,18 +128,18 @@ class AddProductProvider extends ChangeNotifier {
     };
 
     // controllers
-    titleInputController.text = "";
-    descInputController.text = "";
-    propetiesInputController.text = "";
-    hashtagsInputController.text = "";
-    locationInputController.text = "";
-    addrInputController.text = "";
-    shortletFeeInputController.text = "";
-    shortletCautionFeeInputController.text = "";
-    rentInputController.text = "";
-    agreementInputController.text = "";
-    commisionInputController.text = "";
-    rentCautionFeeInputController.text = "";
+    titleInputController.clear();
+    descInputController.clear();
+    propetiesInputController.clear();
+    hashtagsInputController.clear();
+    locationInputController.clear();
+    addrInputController.clear();
+    shortletFeeInputController.clear();
+    shortletCautionFeeInputController.clear();
+    rentInputController.clear();
+    agreementInputController.clear();
+    commisionInputController.clear();
+    rentCautionFeeInputController.clear();
 
     notifyListeners();
   }

@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:realtz_mobile/widgets/settings/Security/password.dart';
-import 'package:realtz_mobile/widgets/settings/Account/user_information.dart';
 import 'package:realtz_mobile/widgets/settings/settings_section.dart';
 
-class Account extends StatefulWidget {
-  const Account({super.key});
+class Security extends StatefulWidget {
+  const Security({super.key});
 
   @override
-  State<Account> createState() => _AccountState();
+  State<Security> createState() => _SecurityState();
 }
 
-class _AccountState extends State<Account> {
-  List<Map<String, dynamic>> accountOptions = [
+class _SecurityState extends State<Security> {
+  List<Map<String, dynamic>> securityOptions = [
     {
-      'label': 'User information',
+      'label': 'Change Password',
       'type': 'route',
-      'route': const UserInformation(),
-    },
-    {
-      'label': 'Delete Account',
-      'type': 'action',
-      'action': () {
-        print('deleting account');
-      },
+      'route': const Password(),
     },
   ];
 
@@ -45,7 +37,7 @@ class _AccountState extends State<Account> {
             const SizedBox(
               height: 14,
             ),
-            SettingsSection(options: accountOptions),
+            SettingsSection(options: securityOptions),
           ],
         ),
       ),

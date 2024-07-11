@@ -68,35 +68,3 @@ class _SettingsSectionState extends State<SettingsSection> {
     );
   }
 }
-
-// Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Row(
-//             children: [
-//               Icon(
-//                 widget.options['iconData'],
-//                 color: Theme.of(context).colorScheme.inversePrimary,
-//               ),
-//               const SizedBox(
-//                 width: 7,
-//               ),
-//               Text(
-//                 widget.options['label'],
-//                 style:
-//                     const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-//               ),
-//             ],
-//           ),
-//           IconButton(
-//             onPressed: () {
-//               Navigator.of(context)
-//                   .push(MaterialPageRoute(builder: (context) => widget.options['route']));
-//             },
-//             icon: const Icon(
-//               Icons.arrow_forward_ios,
-//               size: 15,
-//             ),
-//           )
-//         ],
-//       ),

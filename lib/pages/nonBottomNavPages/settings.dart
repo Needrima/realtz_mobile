@@ -4,6 +4,7 @@ import 'package:realtz_mobile/pages/onboardingPages/login.dart';
 import 'package:realtz_mobile/sharedPrefs/auth_shared_pref.dart';
 import 'package:realtz_mobile/widgets/authWrapper/auth_wrapper.dart';
 import 'package:realtz_mobile/widgets/settings/Account/account.dart';
+import 'package:realtz_mobile/widgets/settings/Security/security.dart';
 import 'package:realtz_mobile/widgets/settings/settings_section.dart';
 
 class Settings extends StatefulWidget {
@@ -22,16 +23,10 @@ class _SettingsState extends State<Settings> {
       'route': const Account(),
     },
     {
-      'label': 'Privacy',
-      'iconData': Icons.private_connectivity_rounded,
-      'type': 'route',
-      'route': const Account(),
-    },
-    {
       'label': 'Security',
       'iconData': Icons.security_rounded,
       'type': 'route',
-      'route': const Account(),
+      'route': const Security(),
     },
   ];
 
